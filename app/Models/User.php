@@ -20,6 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'year',
+        'experience',
+        'admin',
         'password',
     ];
 
@@ -41,4 +44,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    //reservationsテーブルに対するリレーション(主)
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    
+    //practice_songsテーブルに対するリレーション(主)
+    public function practice_songs()
+    {
+        return $this->hasMany(Practice_Song::class);
+    }
 }
