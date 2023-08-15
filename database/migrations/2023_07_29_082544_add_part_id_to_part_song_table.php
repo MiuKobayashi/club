@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reserves', function (Blueprint $table) {
-            $table->id();
-            $table->dateTime('start_at');
-            $table->dateTime('end_at');
-            $table->timestamps();
+        Schema::table('part_song', function (Blueprint $table) {
+            $table->foreignId('part_id')->constrained();
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reserves');
+        Schema::table('practice_songs_parts', function (Blueprint $table) {
+            //
+        });
     }
 };

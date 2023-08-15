@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Schedule;
+use App\Models\User;
 
 class ScheduleController extends Controller
 {
     public function scheduleAdd(Request $request)
-    {
+    {   
         // バリデーションで32文字以上を制限
         $request->validate([
             'start_date' => 'required|integer',
@@ -42,6 +44,7 @@ class ScheduleController extends Controller
         return Schedule::query()
             ->select(
                 //fullCalendarの形式に
+                'id',
                 'start_date as start',
                 'end_date as end',
                 'event_name as title'
@@ -51,4 +54,14 @@ class ScheduleController extends Controller
             ->where('start_date', '<', $end_date)
             ->get();
     }
+    
+    public function scheduleDelete(Request $request)
+    {   
+        // 削除処理
+        // dd(Schedule::find($request->id));
+        $schedule = Schedule::find($request->id);
+        $schedule->delete();
+        return redirect('/schedule-get');
+    }
+    
 }

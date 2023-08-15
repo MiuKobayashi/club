@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use DateTime;
 
 class UserSeeder extends Seeder
@@ -17,10 +19,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => '部員A',
-            'email' => 'ocha@a.com',
+            'name' => Str::random(10),
+            'email' => Str::random(10).'@edu.cc.ocha.ac.jp',
             'email_verified_at' => new DateTime(),
-            'password' => 'ochamembera',
+            'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'year' => 3,
@@ -28,10 +30,10 @@ class UserSeeder extends Seeder
             'admin' => false,
         ]);
         DB::table('users')->insert([
-            'name' => '部員B',
-            'email' => 'ocha@b.com',
+            'name' => Str::random(10),
+            'email' => Str::random(10).'@edu.cc.ocha.ac.jp',
             'email_verified_at' => new DateTime(),
-            'password' => 'ochamemberb',
+            'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'year' => 2,
@@ -39,10 +41,10 @@ class UserSeeder extends Seeder
             'admin' => false,
         ]);
         DB::table('users')->insert([
-            'name' => '部員C',
-            'email' => 'ocha@c.com',
+            'name' => Str::random(10),
+            'email' => Str::random(10).'@edu.cc.ocha.ac.jp',
             'email_verified_at' => new DateTime(),
-            'password' => 'ochamemberc',
+            'password' => Hash::make('password'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'year' => 1,

@@ -51,9 +51,22 @@ class User extends Authenticatable
         return $this->hasMany(Reservation::class);
     }
     
-    //practice_songsテーブルに対するリレーション(主)
-    public function practice_songs()
+    //songsテーブルに対するリレーション(多対多)
+    public function songs()
     {
-        return $this->hasMany(Practice_Song::class);
+        return $this->belongsToMany(Song::class, 'practice_songs')
+        // ->withPivot('performance')
+        ;
+    }
+    
+    //practice_songsテーブルに対するリレーション(主)
+    public function practicesongs()
+    {
+        return $this->hasMany(PracticeSong::class);
+    }
+    
+    public function getOrderBy()
+    {
+        return $this->orderBy('year', 'DESC')->get();
     }
 }

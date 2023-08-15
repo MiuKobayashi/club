@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('reserves', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+        Schema::table('part_song', function (Blueprint $table) {
+            $table->foreignId('song_id')->constrained();
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('reserves', function (Blueprint $table) {
+        Schema::table('practice_songs_parts', function (Blueprint $table) {
             //
         });
     }

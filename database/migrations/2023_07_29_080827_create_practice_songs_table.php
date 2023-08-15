@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('practice_songs', function (Blueprint $table) {
             $table->id();
-            $table->boolean('ready');
-            $table->boolean('performance');
+            $table->boolean('inprogress');
             $table->timestamps();
+            $table->foreignId('song_id')->constrained();
+            $table->foreignId('part_id')->constrained();
+            $table->foreignId('user_id')->constrained();
         });
     }
 

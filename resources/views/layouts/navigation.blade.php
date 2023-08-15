@@ -18,9 +18,11 @@
                     <x-nav-link :href="route('progress')" :active="request()->routeIs('progress')">
                         {{ __('Progress') }}
                     </x-nav-link>
+                    @if(auth()->user()->admin)
                     <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                         {{ __('Admin') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 
