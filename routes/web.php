@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SongController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PracticeSongController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-/*Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');*/
 
 //ホーム画面
 Route::get('/', function () {
@@ -27,19 +27,33 @@ Route::get('/', function () {
 })->middleware(['auth', 'verified'])->name('home');
 
 //進捗状況画面
-Route::get('/progress', function () {
-    return view('lessons.progress');
-})->name('progress');
+Route::get('/progress', [SongController::class, 'progress'])->name('progress');
+//進捗状況登録画面
+// Route::get('/progress/create', [PracticeSongController::class, 'create']);
+Route::get('/progress/create', [SongController::class, 'songs']);
+// Route::get('/progress/create', [PracticeSongController::class, 'edit']);
+// Route::put('/progress', [PracticeSongController::class, 'update']);
+
+//進捗状況保存画面
+Route::post('/progress', [PracticeSongController::class, 'store']);
 
 //管理者画面
-Route::get('/admin', function () {
-    return view('lessons.admin');
-})->name('admin');
+Route::middleware(['auth', 'admin'])
+->group(function () {
+    Route::get('/admin', function () {
+        return view('lessons.admin');
+    })->name('admin');
+});
+    
 
-//fullCalendarイベント登録
+//FullCalendarイベント登録
 Route::post('/schedule-add', [ScheduleController::class, 'scheduleAdd'])->name('schedule-add');
-//fullCalendarイベント取得
+//FullCalendarイベント取得
 Route::post('/schedule-get', [ScheduleController::class, 'scheduleGet'])->name('schedule-get');
+//FullCalendarイベント削除
+Route::post('/schedule-delete', [ScheduleController::class, 'scheduleDelete'])->name('schedule-delete');
+
+// Route::get('/schedule/edit')
 
 //プロフィール画面
 Route::middleware('auth')->group(function () {

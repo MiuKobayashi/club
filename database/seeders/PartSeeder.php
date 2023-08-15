@@ -27,7 +27,32 @@ class PartSeeder extends Seeder
             'updated_at' => new DateTime(),
         ]);
         DB::table('parts')->insert([
+            'name' => 'Ⅲ箏',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('parts')->insert([
+            'name' => 'Ⅳ箏',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('parts')->insert([
+            'name' => 'Ⅴ箏',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('parts')->insert([
             'name' => '17絃',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('parts')->insert([
+            'name' => '本手',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('parts')->insert([
+            'name' => '替手',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

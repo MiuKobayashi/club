@@ -10,17 +10,25 @@ var calendarEl = document.getElementById("calendar");
 let calendar = new Calendar(calendarEl, {
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     initialView: "dayGridMonth",
+    firstDay: 1,
     headerToolbar: {
         left: "prev,next today",
         center: "title",
         right: "dayGridMonth,timeGridWeek,listWeek",
     },
+    navLinks: true,
+    businessHours:
+  {
+    daysOfWeek: [ 1, 2, 3, 4, 5 ], 
+    startTime: '09:00',
+    endTime: '20:00'
+  },
+    editable: false,
     locale: "ja",
 
     // 日付をクリック、または範囲を選択したイベント
     selectable: true,
     select: function (info) {
-        //alert("selected " + info.startStr + " to " + info.endStr);
 
         // 入力ダイアログ
         const eventName = prompt("イベントを入力してください");
@@ -47,6 +55,8 @@ let calendar = new Calendar(calendarEl, {
 
                 });
         }
+        
+        
     },
     
     events: function (info, successCallback, failureCallback) {
@@ -56,13 +66,27 @@ let calendar = new Calendar(calendarEl, {
                     end_date: info.end.valueOf(),
             })
             .then((response) => {
-                // イベントの追加
+
                 calendar.removeAllEvents();
                 successCallback(response.data);
             })
             .catch(() => {
-                alert("登録できません");
+                alert("表示できません");
             });
     },
+    
+    eventClick: function (info, successCallback, failureCallback) {
+        console.log(`/schedule-delete/${info.event.id}`);
+            axios.post("/schedule-delete",{
+                    id: info.event.id,
+                })
+                .then((response) => {
+                    info.event.remove();
+                    successCallback(response.data);
+                })
+                .catch(() => {
+                    alert("削除できませんでした");
+                });
+    }
 });
 calendar.render();
