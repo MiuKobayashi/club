@@ -14,31 +14,50 @@ let calendar = new Calendar(calendarEl, {
     headerToolbar: {
         left: "prev,next today",
         center: "title",
-        right: "dayGridMonth,timeGridWeek,listWeek",
+        right: "dayGridMonth,timeGridWeek,listMonth",
     },
     navLinks: true,
-    businessHours:
-  {
-    daysOfWeek: [ 1, 2, 3, 4, 5 ], 
-    startTime: '09:00',
-    endTime: '20:00'
-  },
-    editable: false,
+//     businessHours:
+//   {
+//     daysOfWeek: [ 1, 2, 3, 4, 5 ], 
+//     startTime: '09:00',
+//     endTime: '20:00'
+//   },
     locale: "ja",
-
+    
+    //時間表示を制限
+    view: {
+        timeGridWeek: {
+            slotMinTime: '9:00:00',
+            slotMaxTime: '21:00:00'
+        }
+    },
+    
+    //全量表示
+    contentHeight: 'auto',
+    
+    //現在の時刻に赤線ボーダーを表示
+    nowIndicator: true,
+    
+    //月表示の「日」を削除
+    dayCellContent: function(arg){
+		return arg.date.getDate();
+	},
     // 日付をクリック、または範囲を選択したイベント
-    selectable: true,
+    selectable: Boolean(isAdmin),
     select: function (info) {
 
         // 入力ダイアログ
         const eventName = prompt("イベントを入力してください");
+        const startDate = prompt();
+        const endDate = prompt();
 
-        if (eventName) {
+        if (eventName && startDate && endDate) {
             // Laravelの登録処理の呼び出し
             axios
                 .post("/schedule-add", {
-                    start_date: info.start.valueOf(),
-                    end_date: info.end.valueOf(),
+                    start_date: startDate,
+                    end_date: endDate,
                     event_name: eventName,
                 })
                 .then(() => {
@@ -47,7 +66,7 @@ let calendar = new Calendar(calendarEl, {
                         title: eventName,
                         start: info.start,
                         end: info.end,
-                        allDay: true,
+                        allDay: false,
                     });
                 })
                 .catch(() => {
@@ -76,7 +95,9 @@ let calendar = new Calendar(calendarEl, {
     },
     
     eventClick: function (info, successCallback, failureCallback) {
-        console.log(`/schedule-delete/${info.event.id}`);
+        const result = confirm("削除しますか？");
+        
+        if (result) {
             axios.post("/schedule-delete",{
                     id: info.event.id,
                 })
@@ -85,8 +106,9 @@ let calendar = new Calendar(calendarEl, {
                     successCallback(response.data);
                 })
                 .catch(() => {
-                    alert("削除できませんでした");
+                    console.log("削除できませんでした");
                 });
+        }
     }
 });
 calendar.render();

@@ -25,11 +25,14 @@ class PracticeSongController extends Controller
         return redirect('/progress');
     }
     
-    public function check(request $request, PracticeSong $practicesong)
-    {
+    public function done(Request $request, PracticeSong $practicesong)
+    {   
         $input = $request['progress'];
-        $practicesong->inprogress = $input["inprogress"];
-        $practicesong->user_id = auth()->id();
+        $practicesong->fill($input);
+        $practicesong->where('user_id',auth()->id())
+        ->update([
+            'inprogress' => 0
+            ]);
         return redirect('/progress');
     }
     

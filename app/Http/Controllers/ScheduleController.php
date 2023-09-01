@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Schedule;
 use App\Models\User;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
+    public function Schedule(User $user) 
+    {
+        $admin = auth()->user()->admin;
+
+        return response()->json(['admin' => $admin]);
+    }
+    
     public function scheduleAdd(Request $request)
     {   
         // バリデーションで32文字以上を制限
@@ -57,11 +65,25 @@ class ScheduleController extends Controller
     
     public function scheduleDelete(Request $request)
     {   
-        // 削除処理
-        // dd(Schedule::find($request->id));
         $schedule = Schedule::find($request->id);
-        $schedule->delete();
-        return redirect('/schedule-get');
+        if ($schedule) {
+            $schedule->delete();
+            return response()->json(['message' => 'Event deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Event not found'], 404);
+        }
+    }
+
+    public function attendance(Schedule $schedule)
+    {
+        //今月の活動日
+        $StartMonth = Carbon::now()->startOfMonth()->toDateString();
+        $EndMonth = Carbon::now()->endOfMonth()->toDateString();
+        $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])->where('event_name',"お稽古")->get();
+        return view('lessons.home')->with([
+            'attendances' => $attendance,
+            'startmonth' => $StartMonth,
+            'endmonth' => $EndMonth]);
     }
     
 }
