@@ -22,7 +22,7 @@
                 
                 @foreach($practices as $practice)
                 <tr>
-                    <td><a href='/progress/create'>{{ $practice->name }}</a></td>
+                    <td>{{ $practice->name }}</td>
                     @foreach($practice->practicesongs as $practicesongs)
                         <td>{{ $practicesongs->song->name }}</td>
                         <td>{{ $practicesongs->part->name }}</td>
@@ -31,6 +31,13 @@
                 </tr>
                 @endforeach
             </table>
+            <br>
+            <form action="{{route('done')}}" method="POST">
+            @csrf
+            <button name="progress[inprogress]" onClick="return confirm('お稽古が終了しましたか？');">完了</button>
+            </form>
+            <br>
+            <a href='/progress/create'>登録はこちら</a>
             <br>
             <br>
             
@@ -44,15 +51,17 @@
                 </tr>
 
                     @foreach($performances as $performance)
-                <tr>
-                        <td> {{ $performance->name }} </td>
                         @foreach($performance->parts as $part)
-                            <td>{{ $part->name }}</td>
+                            <tr>    
+                                <td> {{ $performance->name }} </td>
+                                <td>{{ $part->name }}</td>
+                                    @foreach($performance->practicesongs as $user)
+                                        @if($user->part_id==$part->id)
+                                            <td>{{ $user->user->name }}</td>
+                                        @endif
+                                    @endforeach
+                            </tr>
                         @endforeach
-                        @foreach($performance->practicesongs as $user)
-                            <td>{{ $user->user->name }}</td>
-                        @endforeach
-                </tr>
                     @endforeach
             </table>
                 

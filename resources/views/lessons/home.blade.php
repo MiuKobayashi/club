@@ -14,12 +14,21 @@
         <body>
             <h1>お知らせ</h1>
             <h1>今月の活動予定</h1>
+            <script>
+                const isAdmin = {{auth()->user()->admin}};
+            </script>
             <div id='calendar'></div>
-            <h1>月の予定/お稽古時間の予定</h1>
+            <script src="{{ asset('js/calendar.js') }}"></script>
             <h1>今月のお稽古代</h1>
             <h2>今月の{{ Auth::user()->name }}さんのお稽古代</h2>
             <p>1000×4=4000円</p>
             <h1>今月の出欠<h1>
+                <form action="{{route('store')}}" method="POST">
+                @foreach($attendances as $attendance)
+                    <input type="checkbox" name="absent" value={{$attendance->start_date}}>{{$attendance->start_date}}<br>
+                @endforeach
+                <input type="submit" value="休み"/>
+                </form>
         </body>
     </x-app-layout>
 </html>

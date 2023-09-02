@@ -25,17 +25,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('lessons.home');
 })->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [ScheduleController::class, 'attendance'])->middleware(['auth', 'verified'])->name('home');
 
 //進捗状況画面
 Route::get('/progress', [SongController::class, 'progress'])->name('progress');
 //進捗状況登録画面
-// Route::get('/progress/create', [PracticeSongController::class, 'create']);
 Route::get('/progress/create', [SongController::class, 'songs']);
-// Route::get('/progress/create', [PracticeSongController::class, 'edit']);
-// Route::put('/progress', [PracticeSongController::class, 'update']);
 
 //進捗状況保存画面
-Route::post('/progress', [PracticeSongController::class, 'store']);
+Route::post('/progress/create', [PracticeSongController::class, 'store'])->name('store');
+Route::post('/progress', [PracticeSongController::class, 'done'])->name('done');
 
 //管理者画面
 Route::middleware(['auth', 'admin'])
@@ -53,7 +52,6 @@ Route::post('/schedule-get', [ScheduleController::class, 'scheduleGet'])->name('
 //FullCalendarイベント削除
 Route::post('/schedule-delete', [ScheduleController::class, 'scheduleDelete'])->name('schedule-delete');
 
-// Route::get('/schedule/edit')
 
 //プロフィール画面
 Route::middleware('auth')->group(function () {

@@ -13,7 +13,11 @@
         </x-slot>
         <body>
             <h1>今月の活動予定</h1>
+            <script>
+                const isAdmin = {{auth()->user()->admin}};
+            </script>
             <div id='calendar'></div>
+            <script src="{{ asset('js/calendar.js') }}"></script>
             
         </body>
     </x-app-layout>
