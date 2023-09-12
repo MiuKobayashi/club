@@ -6,7 +6,6 @@ import listPlugin from "@fullcalendar/list";
 import axios from 'axios';
 
 
-
 var calendarEl = document.getElementById("calendar");
 if (document.getElementById('user_id') != null) {
     
@@ -82,14 +81,14 @@ if (calendarEl != null) {
         
         // 入力ダイアログ
         const eventName = prompt("イベントを入力してください");
-        
+
         if (eventName) {
 
             // Laravelの登録処理の呼び出し
             axios
                 .post("/schedule-add", {
-                    start_date: info.start.valueOf(),
-                    end_date: info.end.valueOf(),
+                    start_date: startDate,
+                    end_date: endDate,
                     event_name: eventName,
                     user_id: userId,
                 })

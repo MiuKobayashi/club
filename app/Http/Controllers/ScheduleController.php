@@ -20,6 +20,7 @@ class ScheduleController extends Controller
     }
     
     public function scheduleAdd(Request $request, User $user)
+    public function scheduleAdd(Request $request)
     {   
         // バリデーションで32文字以上を制限
         $request->validate([
@@ -87,6 +88,7 @@ class ScheduleController extends Controller
         $EndMonth = Carbon::now()->endOfMonth()->toDateString();
         $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
         ->where('event_name',"お稽古")->get();
+
         return view('lessons.home')->with([
             'attendances' => $attendance,
             'startmonth' => $StartMonth,
