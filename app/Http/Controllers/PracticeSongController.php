@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PracticeSongRequest;
 use App\Models\Song;
 use App\Models\PracticeSong;
 use App\Models\User;
@@ -10,28 +11,29 @@ use App\Models\Part;
 
 class PracticeSongController extends Controller
 {
-     public function create()
-    {
-        return view('lessons.create');
-    }
-    
-     public function store(Request $request, PracticeSong $practicesong)
+     public function store(PracticeSongRequest $request, PracticeSong $practicesong)
     {
         $input = $request['progress'];
         $practicesong->fill($input);
-        $practicesong->user_id = auth()->id();
-        $practicesong->inprogress = 1;
-        $practicesong->save();
+        $practicesong
+        ->where([
+            ['user_id','=',auth()->id()],
+            ['song_id', '=', $input["song_id"]]
+        ])
+        ->update([
+                    'inprogress' => 1
+        ]);
         return redirect('/progress');
     }
     
-    public function check(request $request, PracticeSong $practicesong)
-    {
+    public function done(Request $request, PracticeSong $practicesong)
+    {   
         $input = $request['progress'];
-        $practicesong->inprogress = $input["inprogress"];
-        $practicesong->user_id = auth()->id();
+        $practicesong->fill($input);
+        $practicesong->where('user_id',auth()->id())
+        ->update([
+            'inprogress' => 0
+            ]);
         return redirect('/progress');
     }
-    
-
 }

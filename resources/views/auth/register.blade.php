@@ -18,25 +18,35 @@
         
         <!-- Year -->
         <div class="mt-4">
-            <x-input-label for="year" :value="__('Year')" />
-            <x-text-input id="year" class="block mt-1 w-full" type="year" name="year" :value="old('year')" required autocomplete="username" />
+            <label for="year">Year</label>
+            <div>
+            <select id="year" name="year">
+                <option value="">選択してください</option>
+                <option id="year-1" value=1>1年</option>
+                <option id="year-2" value=2>2年</option>
+                <option id="year-3" value=3>3年</option>
+                <option id="year-4" value=4>4年</option>
+                <option id="year-5" value=5>M1年</option>
+                <option id="year-6" value=6>M2年</option>
+            </select>
             <x-input-error :messages="$errors->get('year')" class="mt-2" />
+            </div>
         </div>
         
         <!-- Experience -->
         <div class="mt-4">
-            <x-input-label for="experience" :value="__('Experience')" />
-            <x-text-input id="experience" class="block mt-1 w-full" type="experience" name="experience" :value="old('experience')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('experience')" class="mt-2" />
+            <label>
+                Experience
+                <div style="padding-top: 8px">
+                    <input id="experience-t" type="radio" name="experience" value=1>
+                    <label for="experience-t">経験者</label>
+                    <input id="experience-f" type="radio" name="experience" value=0>
+                    <label for="experience-f">初心者</label>
+                </div>
+                <x-input-error :messages="$errors->get('experience')" class="mt-2" />
+            </label>
         </div>
         
-        <!-- Admin -->
-        <div class="mt-4">
-            <x-input-label for="admin" :value="__('Admin')" />
-            <x-text-input id="admin" class="block mt-1 w-full" type="admin" name="admin" :value="old('admin')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('admin')" class="mt-2" />
-        </div>
-
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />

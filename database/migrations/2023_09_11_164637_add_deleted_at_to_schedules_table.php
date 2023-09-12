@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
-            $table->id();
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('event_name');
-            $table->timestamps();
-            $table->foreignId('user_id')->nullable(true)->constrained();
+        Schema::table('schedules', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedules');
+        Schema::table('schedules', function (Blueprint $table) {
+            //
+        });
     }
 };

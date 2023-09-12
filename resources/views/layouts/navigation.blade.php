@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('progress')" :active="request()->routeIs('progress')">
                         {{ __('Progress') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('desire')" :active="request()->routeIs('desire')">
+                        {{ __('Desire') }}
+                    </x-nav-link>
                     @if(auth()->user()->admin)
                     <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                         {{ __('Admin') }}

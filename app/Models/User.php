@@ -69,4 +69,16 @@ class User extends Authenticatable
     {
         return $this->orderBy('year', 'DESC')->get();
     }
+    
+    //desiresテーブルに対するリレーション(主)
+    public function desires()
+    {
+        return $this->hasMany(Desire::class);
+    }
+    
+    //announcement_readsテーブルに対するリレーション
+    public function announcement_reads()
+    {
+        return $this->hasMany(AnnouncementRead::class);
+    }
 }

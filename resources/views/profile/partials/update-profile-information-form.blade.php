@@ -46,7 +46,26 @@
                 </div>
             @endif
         </div>
+        
+        <div>
+            <x-input-label for="admin" :value="__('Are you a club activities manager?')" />
+            <input id="admin-t" type="radio" name="admin" value=1 
+                @if (auth()->user()->admin) {
+                    checked
+                }
+                @endif
+            >
+            <label for="admin-t">Yes</label>
+            <input id="admin-f" type="radio" name="admin" value=0 
+                @if (!auth()->user()->admin) {
+                    checked
+                }
+                @endif
+            >
+            <label for="admin-f">No</label>
+        </div>
 
+        
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 

@@ -292,5 +292,17 @@ class Part_SongSeeder extends Seeder
                 'song_id' => 16,
                 'part_id' => 3,
         ]);
+        DB::table('part_song')->insert([
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 17,
+                'part_id' => 1,
+        ]);
+        DB::table('part_song')->insert([
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 17,
+                'part_id' => 2,
+        ]);
     }
 }
