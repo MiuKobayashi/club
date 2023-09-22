@@ -2,10 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,19 +15,23 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
         .changeColor {
-            background-color: mistyrose;
+            background-color: rosybrown;
         }
-        </style>
+        /*-----スマホ向けの記述-----*/
+</style>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-grey-100">
+        <div class="min-h-screen bg-red-50">
             @include('layouts.navigation')
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+{{ $slot }}
+</div>
+</div>
             </main>
         </div>
+
     </body>
 </html>

@@ -29,8 +29,6 @@ Route::get('/', [ScheduleController::class, 'countAttendance'])->middleware(['au
 Route::get('/progress', [SongController::class, 'progress'])->name('progress');
 //進捗状況登録画面
 Route::get('/progress/create', [SongController::class, 'songs']);
-
-//進捗状況保存画面
 Route::post('/progress/create', [PracticeSongController::class, 'store'])->name('songStore');
 Route::post('/progress', [PracticeSongController::class, 'done'])->name('done');
 
@@ -39,7 +37,7 @@ Route::get('/desire', [DesireController::class, 'desire'])->name('desire');
 //希望日程登録画面
 Route::get('/desire/create', [ScheduleController::class, 'desireCreate'])->name('create');
 Route::post('/desire/create', [ScheduleController::class, 'store'])->name('desireStore');
-Route::delete('/desire/create', [ScheduleController::class, 'delete'])->name('absenceDelete');
+Route::delete('/desire', [ScheduleController::class, 'delete'])->name('absenceDelete');
 
 //管理者画面
 Route::middleware(['auth', 'admin'])
@@ -60,6 +58,9 @@ Route::post('/schedule-add', [ScheduleController::class, 'scheduleAdd'])->name('
 //FullCalendarイベント取得
 Route::get('/schedule-get', [ScheduleController::class, 'scheduleGet'])->name('schedule-get');
 Route::post('/schedule-get', [ScheduleController::class, 'scheduleGet'])->name('schedule-get');
+Route::get('/schedule-getAll', [ScheduleController::class, 'scheduleGetAll'])->name('schedule-getAll');
+Route::post('/schedule-getAll', [ScheduleController::class, 'scheduleGetAll'])->name('schedule-getAll');
+
 //FullCalendarイベント削除
 Route::get('/schedule-delete', [ScheduleController::class, 'scheduleDelete'])->name('schedule-delete');
 Route::post('/schedule-delete', [ScheduleController::class, 'scheduleDelete'])->name('schedule-delete');

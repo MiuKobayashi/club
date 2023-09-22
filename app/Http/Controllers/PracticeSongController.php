@@ -13,6 +13,11 @@ class PracticeSongController extends Controller
 {
      public function store(PracticeSongRequest $request, PracticeSong $practicesong)
     {
+        $practicesong->where('user_id',auth()->id())
+        ->update([
+            'inprogress' => 0
+            ]);
+            
         $input = $request['progress'];
         $practicesong->fill($input);
         $practicesong
@@ -21,7 +26,7 @@ class PracticeSongController extends Controller
             ['song_id', '=', $input["song_id"]]
         ])
         ->update([
-                    'inprogress' => 1
+            'inprogress' => 1
         ]);
         return redirect('/progress');
     }
