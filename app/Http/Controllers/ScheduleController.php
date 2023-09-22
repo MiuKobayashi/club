@@ -7,20 +7,13 @@ use App\Http\Requests\DesireRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Schedule;
 use App\Models\User;
+use App\Models\Desire;
 use App\Models\Announcement;
 use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
-    public function Schedule(User $user) 
-    {
-        $admin = auth()->user()->admin;
-
-        return response()->json(['admin' => $admin]);
-    }
-    
     public function scheduleAdd(Request $request, User $user)
-    public function scheduleAdd(Request $request)
     {   
         // バリデーションで32文字以上を制限
         $request->validate([
@@ -38,7 +31,7 @@ class ScheduleController extends Controller
         $user_id = $request->input('user_id');
         $schedule->user_id = $user_id;
         $schedule->save();
-
+        
         return;
     }
     
@@ -51,8 +44,9 @@ class ScheduleController extends Controller
         ]);
         
         //カレンダー表示期間
-        $start_date = date('Y-m-d', $request->input('start_date') / 1000);
-        $end_date = date('Y-m-d', $request->input('end_date') / 1000);
+        $start_date = date('Y-m-d H:i:s', $request->input('start_date') / 1000);
+        $end_date = date('Y-m-d H:i:s', $request->input('end_date') / 1000);
+        
         
         return Schedule::query()
             ->select(
@@ -69,6 +63,34 @@ class ScheduleController extends Controller
             ->where('start_date', '<', $end_date)
             ->get();
     }
+    
+    public function scheduleGetAll(Request $request)
+    {
+        // バリデーションで32文字以上を制限
+        $request->validate([
+            'start_date' => 'required|integer',
+            'end_date' => 'required|integer',
+        ]);
+        
+        //カレンダー表示期間
+        $start_date = date('Y-m-d H:i:s', $request->input('start_date') / 1000);
+        $end_date = date('Y-m-d H:i:s', $request->input('end_date') / 1000);
+        
+
+        return Schedule::query()
+            ->select(
+                //fullCalendarの形式に
+                'id',
+                'start_date as start',
+                'end_date as end',
+                'event_name as title',
+            )
+            //FullCalendarの表示範囲を表示
+            ->where('end_date', '>', $start_date)
+            ->where('start_date', '<', $end_date)
+            ->get();
+    }
+
     
     public function scheduleDelete(Request $request)
     {   
@@ -101,7 +123,7 @@ class ScheduleController extends Controller
         $desire->fill($input);
         $desire->user_id = auth()->user()->id;
         $desire->save();
-        return redirect('/desire');
+        return redirect('/desire/create');
     }
 
     public function desireCreate(Schedule $schedule)
@@ -117,15 +139,10 @@ class ScheduleController extends Controller
             $query->where('user_id', auth()->user()->id);
         }])->get();
         
-        $absence = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
-        ->where('event_name',"お稽古")
-        ->where('user_id', auth()->user()->id )
-        ->orderBy('start_date')
-        ->get();
-        
+
         return view('lessons.desire_create')->with([
             'attendances' => $attendance,
-            'absences' => $absence]);
+            ]);
     }
 
     
@@ -133,7 +150,7 @@ class ScheduleController extends Controller
     {
         $input = $request['absence'];
         $schedule::where('id', $input)->delete();
-        return redirect('/desire/create');
+        return redirect('/desire');
     }
     
     
@@ -142,9 +159,9 @@ class ScheduleController extends Controller
         $announce = new Announcement();
         $announcement = $announce->getPaginateByLimit();
         
-        //来月の活動日
-        $StartMonth = Carbon::now()->startOfMonth()->addMonthNoOverflow()->toDateString();
-        $EndMonth = Carbon::now()->endOfMonth()->addMonthNoOverflow()->toDateString();
+        //今月の活動日
+        $StartMonth = Carbon::now()->startOfMonth()->toDateString();
+        $EndMonth = Carbon::now()->endOfMonth()->toDateString();
         $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
         ->where('event_name',"お稽古")
         ->where('user_id', auth()->user()->id )
