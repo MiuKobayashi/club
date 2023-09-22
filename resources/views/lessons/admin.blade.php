@@ -2,10 +2,10 @@
     <div class="m-5">
         <h1 class="mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">希望時間</h1>
         <div class="max-w-fit">
-
            @foreach($attendances as $attendance)
             <h1 class="font-bold">{{ $attendance->start_date->format('Y/m/d') }}</h1>
-            <table>
+            <div class="m-2.5 flex justify-center">
+                <table class="flex justify-center">
                     <tr class="border-b-4 border-red-300">
                         <th class="border-r-4 border-red-300"></th>
                         @for ($i = 0; $i < 8; $i++)
@@ -32,7 +32,7 @@
                     </tr>
                     @endforeach
                 </table>
-                <br>
+                </div>
             @endforeach
         </div>
         <h2 class="mt-5 mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">活動の登録</h2>
@@ -55,7 +55,7 @@
             const isAdmin = {{auth()->user()->admin}};
             let Duration = '00:10:00';
         </script>
-        <div id='calendar' class="max-w-fit"></div>
+        <div id='calendar' class="bg-white max-w-fit"></div>
             <a href='/admin/create' class="hover:underline">お稽古登録・お知らせ投稿はこちら</a>
         </form>
         </div>

@@ -26,14 +26,14 @@
                         </select>
                         <p class="part__error" style="color:darkred">{{ $errors->first('progress.part_id') }}</p>
                     </div>
-                    <div class="flex items-center justify-between sm:col-span-2">
+                    <div class="flex items-center justify-end sm:col-span-2">
                         <button type="submit" class="inline-block rounded-lg bg-pink-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-700 transition duration-100 hover:bg-pink-700 focus-visible:ring active:bg-pink-700 md:text-base">登録</button>
-                        <span class="text-sm text-gray-500">*Required</span>
                     </div>
+                    <div class="mx-10 mt-5 flex justify-end hover:underline">
+                        <a href="/progress" class="hover:underline flex justify-start">戻る</a>
+                    </div>
+                        <span class="text-sm text-gray-500">*Required</span>
                 </form>
-            <div class="footer">
-            <a href="/progress" class="hover:underline flex justify-end">戻る</a>
-            </div>
         </div>
     </div>
     <script>

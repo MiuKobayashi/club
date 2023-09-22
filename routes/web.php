@@ -22,22 +22,32 @@ use Illuminate\Support\Facades\Route;
 
 
 //ホーム画面
-// Route::get('/', [AnnouncementController::class, 'announcement'])->middleware(['auth', 'verified'])->name('home');
-Route::get('/', [ScheduleController::class, 'countAttendance'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [ScheduleController::class, 'countAttendance'])
+->middleware(['auth', 'verified'])->name('home');
 
-//進捗状況画面
-Route::get('/progress', [SongController::class, 'progress'])->name('progress');
-//進捗状況登録画面
-Route::get('/progress/create', [SongController::class, 'songs']);
-Route::post('/progress/create', [PracticeSongController::class, 'store'])->name('songStore');
-Route::post('/progress', [PracticeSongController::class, 'done'])->name('done');
+Route::controller(SongController::class)->middleware(['auth'])->group(function(){
+    //進捗状況画面
+    Route::get('/progress', 'progress')->name('progress');
+    //進捗状況登録画面
+    Route::get('/progress/create', 'songs');
+});
+
+Route::controller(PracticeController::class)->middleware(['auth'])->group(function(){
+    //進捗状況登録画面（登録）
+    Route::post('/progress/create', 'store')->name('songStore');
+    //進捗状況登録画面（完了）
+    Route::post('/progress', 'done')->name('done');
+});
 
 //希望日程確認画面
-Route::get('/desire', [DesireController::class, 'desire'])->name('desire');
-//希望日程登録画面
-Route::get('/desire/create', [ScheduleController::class, 'desireCreate'])->name('create');
-Route::post('/desire/create', [ScheduleController::class, 'store'])->name('desireStore');
-Route::delete('/desire', [ScheduleController::class, 'delete'])->name('absenceDelete');
+Route::get('/desire', [DesireController::class, 'desire'])->name('desire')->middleware('auth');
+
+Route::controller(ScheduleController::class)->middleware(['auth'])->group(function(){
+    //希望日程登録画面
+    Route::get('/desire/create', 'desireCreate')->name('create');
+    Route::post('/desire/create', 'store')->name('desireStore');
+    Route::delete('/desire', 'delete')->name('absenceDelete');
+});
 
 //管理者画面
 Route::middleware(['auth', 'admin'])
@@ -45,26 +55,29 @@ Route::middleware(['auth', 'admin'])
     Route::get('/admin', [DesireController::class, 'admin'])->name('admin');
     Route::post('/admin', [AnnouncementController::class, 'store']);
 });
-//お知らせ登録
-Route::get('/admin/create', [AnnouncementController::class, 'create']);
-//お知らせ編集
-Route::get('/admin/edit', [AnnouncementController::class, 'edit']);
-Route::put('/admin', [AnnouncementController::class, 'update']);
+
+Route::controller(AnnouncementController::class)->middleware('auth')->group(function(){
+    //お知らせ登録
+    Route::get('/admin/create', 'create');
+    // //お知らせ編集
+    // Route::get('/admin/edit', [AnnouncementController::class, 'edit']);
+    // Route::put('/admin', [AnnouncementController::class, 'update']);
+});
+
+Route::controller(ScheduleController::class)->middleware('auth')->group(function(){
+    //FullCalendarイベント登録
+    Route::get('/schedule-add', 'scheduleAdd')->name('schedule-add');
+    Route::post('/schedule-add', 'scheduleAdd')->name('schedule-add');
+    //FullCalendarイベント取得
+    Route::get('/schedule-get', 'scheduleGet')->name('schedule-get');
+    Route::post('/schedule-get', 'scheduleGet')->name('schedule-get');
+    Route::get('/schedule-getAll', 'scheduleGetAll')->name('schedule-getAll');
+    Route::post('/schedule-getAll', 'scheduleGetAll')->name('schedule-getAll');
     
-
-//FullCalendarイベント登録
-Route::get('/schedule-add', [ScheduleController::class, 'scheduleAdd'])->name('schedule-add');
-Route::post('/schedule-add', [ScheduleController::class, 'scheduleAdd'])->name('schedule-add');
-//FullCalendarイベント取得
-Route::get('/schedule-get', [ScheduleController::class, 'scheduleGet'])->name('schedule-get');
-Route::post('/schedule-get', [ScheduleController::class, 'scheduleGet'])->name('schedule-get');
-Route::get('/schedule-getAll', [ScheduleController::class, 'scheduleGetAll'])->name('schedule-getAll');
-Route::post('/schedule-getAll', [ScheduleController::class, 'scheduleGetAll'])->name('schedule-getAll');
-
-//FullCalendarイベント削除
-Route::get('/schedule-delete', [ScheduleController::class, 'scheduleDelete'])->name('schedule-delete');
-Route::post('/schedule-delete', [ScheduleController::class, 'scheduleDelete'])->name('schedule-delete');
-
+    //FullCalendarイベント削除
+    Route::get('/schedule-delete', 'scheduleDelete')->name('schedule-delete');
+    Route::post('/schedule-delete', 'scheduleDelete')->name('schedule-delete');
+});
 
 //プロフィール画面
 Route::middleware('auth')->group(function () {
