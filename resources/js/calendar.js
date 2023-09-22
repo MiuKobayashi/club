@@ -98,15 +98,11 @@ if (calendarEl != null) {
         selectable: Boolean(isAdmin),
         select: function (info) {
         
-            console.log(info.start.valueOf());
-            console.log(info.end.valueOf());
-            
             // 入力ダイアログ
             const eventName = prompt("イベントを入力してください");
         
             if (eventName) {
 
-            
                 // Laravelの登録処理の呼び出し
                 axios
                     .post("/schedule-add", {
@@ -160,6 +156,9 @@ if (calendarEl != null) {
         eventClick: function (info, successCallback, failureCallback) {
             const result = confirm("削除しますか？");
             if (result) {
+                if (info.timeText == "0:00") {
+            info.event.setAllDay(true); // 終日のイベントの場合、allDayをtrueに設定
+        }
                 axios.post("/schedule-delete",{
                         id: info.event.id,
                     })
@@ -189,10 +188,6 @@ if (calendarEl != null) {
             if (info.timeText == "0:00") {
                 info.event._def.allDay=true;
             }
-             
-                
-            console.log(info);
-            
         },
         
             }

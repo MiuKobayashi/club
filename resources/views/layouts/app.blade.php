@@ -17,21 +17,36 @@
         .changeColor {
             background-color: rosybrown;
         }
-        /*-----スマホ向けの記述-----*/
-</style>
+        .fc .fc-timegrid-now-indicator-arrow {
+            position: absolute;
+            z-index: 4;
+            margin-top: -10px;
+            border-style: solid;
+            border-left: 7px solid crimson;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+        }
+        .fc .fc-timegrid-now-indicator-line {
+            opacity: .7;
+            position: absolute;
+            z-index: 4;
+            left: 0;
+            right: 0;
+            margin-top: -2px;
+            border-style: solid;
+            border-color: crimson;
+            border-width: 5px 0 0;
+        }
+        </style>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-red-50">
+        <div class="w-screen h-screen bg-red-50 flex flex-column m-0">
             @include('layouts.navigation')
-
             <!-- Page Content -->
-            <main>
-{{ $slot }}
-</div>
-</div>
+            <main class="flex-1 mt-24">
+                {{ $slot }}
             </main>
         </div>
-
     </body>
 </html>
