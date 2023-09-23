@@ -32,7 +32,7 @@ Route::controller(SongController::class)->middleware(['auth'])->group(function()
     Route::get('/progress/create', 'songs');
 });
 
-Route::controller(PracticeController::class)->middleware(['auth'])->group(function(){
+Route::controller(PracticeSongController::class)->middleware(['auth'])->group(function(){
     //進捗状況登録画面（登録）
     Route::post('/progress/create', 'store')->name('songStore');
     //進捗状況登録画面（完了）

@@ -18,19 +18,19 @@ class AnnouncementSeeder extends Seeder
     {
         DB::table('announcements')->insert([
             'title' => 'テストタイトル01',
-            'description' => 'テストお知らせ\nテストお知らせ\nテストお知らせ01',
+            'description' => 'テストお知らせ01です',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('announcements')->insert([
             'title' => 'テストタイトル02',
-            'description' => 'テストお知らせ\nテストお知らせ\nテストお知らせ02',
+            'description' => 'テストお知らせ02です',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('announcements')->insert([
             'title' => 'テストタイトル03',
-            'description' => 'テストお知らせ\nテストお知らせ\nテストお知らせ03',
+            'description' => 'テストお知らせ03です',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

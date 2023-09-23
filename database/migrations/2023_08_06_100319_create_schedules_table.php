@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('event_name');
             $table->timestamps();
             $table->foreignId('user_id')->nullable(true)->constrained();
+            $table->softDeletes();
         });
     }
 

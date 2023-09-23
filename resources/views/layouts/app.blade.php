@@ -41,7 +41,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="w-screen h-screen bg-red-50 flex flex-column m-0">
+        <div class="w-screen min-h-screen bg-red-50 flex">
             @include('layouts.navigation')
             <!-- Page Content -->
             <main class="flex-1 mt-24">

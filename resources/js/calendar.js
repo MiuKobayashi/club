@@ -7,10 +7,10 @@ import axios from 'axios';
 
 
 var calendarEl = document.getElementById("calendar");
-if (document.getElementById('user_id') != null) {
+if (document.getElementById("user_id") != null) {
     
-    let memberId = document.getElementById('user_id');
-    memberId.addEventListener('change', function(){
+    let memberId = document.getElementById("user_id");
+    memberId.addEventListener("change", function(){
         userId = memberId.value;
     });
 }
@@ -23,16 +23,19 @@ let activeButtonId = "myLessons"; // 初期値を設定
 let calendar;
 
 // ボタンがクリックされたときの処理
-document.getElementById("myLessons").addEventListener("click", function () {
-    activeButtonId = "myLessons";
-    calendar.refetchEvents();
-});
+if (document.getElementById("myLessons") != null) {
+    document.getElementById("myLessons").addEventListener("click", function () {
+        activeButtonId = "myLessons";
+        calendar.refetchEvents();
+    });
+}
 
-document.getElementById("allLessons").addEventListener("click", function () {
-    activeButtonId = "allLessons";
-    calendar.refetchEvents();
-});
-
+if (document.getElementById("allLessons") != null) {
+    document.getElementById("allLessons").addEventListener("click", function () {
+        activeButtonId = "allLessons";
+        calendar.refetchEvents();
+    });
+}
 
 if (calendarEl != null) {
     calendar = new Calendar(calendarEl, {
