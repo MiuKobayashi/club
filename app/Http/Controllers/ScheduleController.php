@@ -103,20 +103,6 @@ class ScheduleController extends Controller
         }
     }
 
-    public function attendance(Schedule $schedule)
-    {
-        //今月の活動日
-        $StartMonth = Carbon::now()->startOfMonth()->toDateString();
-        $EndMonth = Carbon::now()->endOfMonth()->toDateString();
-        $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
-        ->where('event_name',"お稽古")->get();
-
-        return view('lessons.home')->with([
-            'attendances' => $attendance,
-            'startmonth' => $StartMonth,
-            'endmonth' => $EndMonth]);
-    }
-    
     public function store(DesireRequest $request, Desire $desire)
     {
         $input = $request['desire'];
@@ -131,7 +117,7 @@ class ScheduleController extends Controller
         //来月の活動日
         $StartMonth = Carbon::now()->startOfMonth()->addMonthNoOverflow()->toDateString();
         $EndMonth = Carbon::now()->endOfMonth()->addMonthNoOverflow()->toDateString();
-        $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
+        $attendance = Schedule::whereBetween('start_date',[$StartMonth,$EndMonth])
         ->where('event_name',"お稽古")
         ->where('user_id', NULL)
         ->orderBy('start_date')
@@ -162,7 +148,7 @@ class ScheduleController extends Controller
         //今月の活動日
         $StartMonth = Carbon::now()->startOfMonth()->toDateString();
         $EndMonth = Carbon::now()->endOfMonth()->toDateString();
-        $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
+        $attendance = Schedule::whereBetween('start_date',[$StartMonth,$EndMonth])
         ->where('event_name',"お稽古")
         ->where('user_id', auth()->user()->id )
         ->where('deleted_at', NULL)
