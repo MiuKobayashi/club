@@ -20,7 +20,7 @@
         <div class="mt-4">
             <label for="year">Year</label>
             <div>
-            <select id="year" name="year">
+            <select id="year" name="year" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <option value="">選択してください</option>
                 <option id="year-1" value=1>1年</option>
                 <option id="year-2" value=2>2年</option>
@@ -35,8 +35,7 @@
         
         <!-- Experience -->
         <div class="mt-4">
-            <label>
-                Experience
+            <label>Experience
                 <div style="padding-top: 8px">
                     <input id="experience-t" type="radio" name="experience" value=1>
                     <label for="experience-t">経験者</label>

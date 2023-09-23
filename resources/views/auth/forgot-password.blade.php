@@ -17,6 +17,9 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
+            <div class="m-5 flex items-center justify-center bg-gray-100 p-4">
+                <p class="text-center text-sm text-gray-500">Don't have an account? <a href="/register" class="text-gray-600 underline transition duration-100 hover:text-gray-900 active:text-indigo-700">Register</a></p>
+            </div>
             <x-primary-button>
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>
