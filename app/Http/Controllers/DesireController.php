@@ -21,13 +21,13 @@ class DesireController extends Controller
         $StartMonth = Carbon::now()->startOfMonth()->addMonthNoOverflow()->toDateString();
         $EndMonth = Carbon::now()->endOfMonth()->addMonthNoOverflow()->toDateString();
         
-        $absence = Schedule::whereBetween('Start_date',[$Start,$End])
+        $absence = Schedule::whereBetween('start_date',[$Start,$End])
         ->where('event_name',"お稽古")
         ->where('user_id', auth()->user()->id )
         ->orderBy('start_date')
         ->get();
 
-        $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
+        $attendance = Schedule::whereBetween('start_date',[$StartMonth,$EndMonth])
         ->where('event_name',"お稽古")
         ->where('user_id', NULL)
         ->orderBy('start_date')
@@ -57,7 +57,7 @@ class DesireController extends Controller
         
         $StartMonth = Carbon::now()->startOfMonth()->addMonthNoOverflow()->toDateString();
         $EndMonth = Carbon::now()->endOfMonth()->addMonthNoOverflow()->toDateString();
-        $attendance = Schedule::whereBetween('Start_date',[$StartMonth,$EndMonth])
+        $attendance = Schedule::whereBetween('start_date',[$StartMonth,$EndMonth])
         ->where('event_name',"お稽古")
         ->where('user_id', NULL)
         ->orderBy('start_date')

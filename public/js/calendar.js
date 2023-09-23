@@ -8,7 +8,6 @@ import axios from 'axios';
 
 var calendarEl = document.getElementById("calendar");
 if (document.getElementById("user_id") != null) {
-    
     let memberId = document.getElementById("user_id");
     memberId.addEventListener("change", function(){
         userId = memberId.value;
@@ -16,9 +15,10 @@ if (document.getElementById("user_id") != null) {
 }
 
 
-
 let userId = null;
 let activeButtonId = "myLessons"; // 初期値を設定
+// let isAdmin;
+// let Duration;
 
 let calendar;
 
@@ -36,6 +36,19 @@ if (document.getElementById("allLessons") != null) {
         calendar.refetchEvents();
     });
 }
+
+// if (typeof( isAdmin ) != 'undefined' && isAdmin == true) {
+//     isAdmin = true;
+// } else {
+//     isAdmin = false;
+// }
+
+// if (typeof( Duration ) != 'undefined' && Duration == '00:10:00') {
+//     Duration = '00:10:00';
+// } else {
+//     Duration = '00:30:00';
+// }
+
 
 if (calendarEl != null) {
     calendar = new Calendar(calendarEl, {
@@ -99,6 +112,7 @@ if (calendarEl != null) {
 
         // 日付をクリック、または範囲を選択したイベント
         selectable: Boolean(isAdmin),
+        
         select: function (info) {
         
             // 入力ダイアログ

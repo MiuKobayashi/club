@@ -1,5 +1,5 @@
 import './bootstrap';
-import './calendar';
+import '../../public/js/calendar';
 
 import Alpine from 'alpinejs';
 
