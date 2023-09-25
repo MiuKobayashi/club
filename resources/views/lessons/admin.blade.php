@@ -57,7 +57,7 @@
                 </div>
             </div>
         <script>
-            const isAdmin = {{auth()->user()->admin}};
+            let isAdmin = {{auth()->user()->admin}};
             let Duration = '00:10:00';
         </script>
         <script src="{{ asset('/js/calendar.js') }}"></script>

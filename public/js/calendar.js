@@ -17,8 +17,6 @@ if (document.getElementById("user_id") != null) {
 
 let userId = null;
 let activeButtonId = "myLessons"; // 初期値を設定
-// let isAdmin;
-// let Duration;
 
 let calendar;
 
@@ -36,18 +34,6 @@ if (document.getElementById("allLessons") != null) {
         calendar.refetchEvents();
     });
 }
-
-// if (typeof( isAdmin ) != 'undefined' && isAdmin == true) {
-//     isAdmin = true;
-// } else {
-//     isAdmin = false;
-// }
-
-// if (typeof( Duration ) != 'undefined' && Duration == '00:10:00') {
-//     Duration = '00:10:00';
-// } else {
-//     Duration = '00:30:00';
-// }
 
 
 if (calendarEl != null) {
