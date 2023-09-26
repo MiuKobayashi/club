@@ -24,12 +24,7 @@
             <button id="allLessons" class="m-2.5 inline-block rounded-lg border-2 border-transparent bg-pink-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-900 transition duration-100 hover:bg-pink-700 focus:border-red-50 focus:bg-pink-700 focus-visible:ring md:text-base">部員の予定</button>
         </div>
         <script>
-            let isAdmin = "";
-            if ({{auth()->user()->admin}}) {
-                isAdmin = 1;
-            } else {
-                isAdmin = 0;
-            };
+            let isAdmin = @json(auth()->user->admin);
             let Duration = '00:30:00';
         </script>
         <script src="{{ asset('/js/calendar.js') }}"></script>
