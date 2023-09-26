@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Practice_SongSeeder::class);
         $this->call(Part_SongSeeder::class);
         $this->call(ScheduleSeeder::class);
-        $this->call(DesireSeeder::class);
+        // $this->call(DesireSeeder::class);
         $this->call(AnnouncementSeeder::class);
     }
 }
