@@ -9,6 +9,10 @@ class Part extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'name',
+    ];
+    
     //songsテーブルに対するリレーション(多対多)
     public function songs()
     {

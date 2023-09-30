@@ -32,15 +32,24 @@ Route::controller(SongController::class)->middleware(['auth'])->group(function()
     Route::get('/progress/create', 'songs');
 });
 
+//お稽古進捗画面
 Route::controller(PracticeSongController::class)->middleware(['auth'])->group(function(){
     //進捗状況登録画面（登録）
     Route::post('/progress/create', 'store')->name('songStore');
     //進捗状況登録画面（完了）
     Route::post('/progress', 'done')->name('done');
 });
+//楽曲登録画面（管理者）
+Route::controller(SongController::class)->middleware(['auth', 'admin'])->group(function(){
+    Route::get('/progress/store', 'store')->name('store');
+    Route::post('progress/store', 'newSong')->name('newSongStore');
+    Route::post('progress/store-practice', 'newPractice')->name('newPracticeStore');
+});
+
+
 
 //希望日程確認画面
-Route::get('/desire', [DesireController::class, 'desire'])->name('desire')->middleware('auth');
+Route::get('/desire', [DesireController::class, 'desire'])->middleware('auth')->name('desire');
 
 Route::controller(ScheduleController::class)->middleware(['auth'])->group(function(){
     //希望日程登録画面
@@ -56,7 +65,7 @@ Route::middleware(['auth', 'admin'])
     Route::post('/admin', [AnnouncementController::class, 'store']);
 });
 
-Route::controller(AnnouncementController::class)->middleware('auth')->group(function(){
+Route::controller(AnnouncementController::class)->middleware(['auth', 'admin'])->group(function(){
     //お知らせ登録
     Route::get('/admin/create', 'create');
     // //お知らせ編集

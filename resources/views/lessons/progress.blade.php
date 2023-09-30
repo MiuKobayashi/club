@@ -8,9 +8,9 @@
                         <table class="min-w-50 text-center border-separate">
                           <thead class="border-b-2">
                             <tr>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">名前</th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">曲名</th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">パート</th>
+                                <th scope="col" class="bg-red-300 text-sm font-semibold text-gray-900 px-6 py-4">名前</th>
+                                <th scope="col" class="bg-red-200 text-sm font-semibold text-gray-900 px-6 py-4">曲名</th>
+                                <th scope="col" class="bg-red-100 text-sm font-semibold text-gray-900 px-6 py-4">パート</th>
                             </tr>
                             @foreach($practices as $practice)
                                 <tr class="border-b-2 text-white">
@@ -45,9 +45,9 @@
                     <table class="min-w-50 text-center border-separate">
                         <thead class="border-b-2">
                             <tr>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">曲名</th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">パート</th>
-                                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">名前</th>
+                                <th scope="col" class="bg-red-300 text-sm font-semibold text-gray-900 px-6 py-4">曲名</th>
+                                <th scope="col" class="bg-red-200 text-sm font-semibold text-gray-900 px-6 py-4">パート</th>
+                                <th scope="col" class="bg-red-100 text-sm font-semibold text-gray-900 px-6 py-4">名前</th>
                             </tr>
                                 @foreach($performances as $performance)
                                     <tr class="border-b-2 text-white">    
@@ -68,6 +68,11 @@
                     </table>
                 </div>
             </div>
+            @if(auth()->user()->admin)
+            <div class="mx-10 mt-5 flex justify-end hover:underline">
+                <a href='/progress/store'>曲の登録はこちら</a>
+            </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
