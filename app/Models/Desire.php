@@ -14,6 +14,7 @@ class Desire extends Model
         'end_time',
         'user_id',
         'schedule_id',
+        'remarks'
     ];
     
     public function schedule()
