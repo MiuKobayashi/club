@@ -21,15 +21,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//ホーム画面
-Route::get('/', [ScheduleController::class, 'countAttendance'])
-->middleware(['auth', 'verified'])->name('home');
-
 Route::controller(SongController::class)->middleware(['auth'])->group(function(){
     //進捗状況画面
     Route::get('/progress', 'progress')->name('progress');
     //進捗状況登録画面
-    Route::get('/progress/create', 'songs');
+    Route::get('/progress/create', 'songs')->name('progressCreate');
 });
 
 //お稽古進捗画面
@@ -65,14 +61,6 @@ Route::middleware(['auth', 'admin'])
     Route::post('/admin', [AnnouncementController::class, 'store']);
 });
 
-Route::controller(AnnouncementController::class)->middleware(['auth', 'admin'])->group(function(){
-    //お知らせ登録
-    Route::get('/admin/create', 'create');
-    // //お知らせ編集
-    // Route::get('/admin/edit', [AnnouncementController::class, 'edit']);
-    // Route::put('/admin', [AnnouncementController::class, 'update']);
-});
-
 Route::controller(ScheduleController::class)->middleware('auth')->group(function(){
     //FullCalendarイベント登録
     Route::get('/schedule-add', 'scheduleAdd')->name('schedule-add');
@@ -82,7 +70,6 @@ Route::controller(ScheduleController::class)->middleware('auth')->group(function
     Route::post('/schedule-get', 'scheduleGet')->name('schedule-get');
     Route::get('/schedule-getAll', 'scheduleGetAll')->name('schedule-getAll');
     Route::post('/schedule-getAll', 'scheduleGetAll')->name('schedule-getAll');
-    
     //FullCalendarイベント削除
     Route::get('/schedule-delete', 'scheduleDelete')->name('schedule-delete');
     Route::post('/schedule-delete', 'scheduleDelete')->name('schedule-delete');
@@ -94,5 +81,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//ホーム画面
+Route::get('/', [ScheduleController::class, 'countAttendance'])
+->middleware(['auth', 'verified'])->name('home');
+//お知らせ（管理者）
+Route::controller(AnnouncementController::class)->middleware(['auth', 'verified', 'admin'])->group(function(){
+    //お知らせ登録
+    Route::get('/create', 'create');
+    Route::post('/create', 'store')->name('announceStore');
+    //お知らせ編集
+    Route::get('/{announcement}', 'edit');
+    Route::put('/{announcement}', 'update');
+    //お知らせ削除
+    Route::delete('/{announcement}', 'delete');
+});
+
 
 require __DIR__.'/auth.php';

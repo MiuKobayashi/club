@@ -1,4 +1,9 @@
 <x-app-layout>
+    <div class="m-5">
+        <a href="/progress" class="hover:underline">Progress</a>
+        ＞
+        <a href="/progress/store" class="text-indigo-800 hover:underline">曲目の登録</a>
+    </div>
     <div class="py-6 sm:py-8 lg:py-12">
         <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
             <!--説明-->

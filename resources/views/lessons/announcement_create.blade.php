@@ -1,9 +1,12 @@
 <x-app-layout>
     <div class="m-5">
-    <div class="mb-10 md:mb-16">
-        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">お知らせ登録</h2>
-    </div>    
-        <form action="/admin" method="POST" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+        <a href="/" class="hover:underline">Home</a>
+        ＞
+        <a href="/create" class="text-indigo-800 hover:underline">お知らせ登録</a>
+        <div class="mb-10 md:mb-16">
+            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">お知らせ登録</h2>
+        </div>    
+        <form action="/create" method="POST" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
             @csrf
             <div class="sm:col-span-2">
                 <label for="announcement" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">タイトル</label>
@@ -20,5 +23,5 @@
                     <span class="text-sm text-gray-500">*Required</span>
             </div>
         </form>
-        </div>
+    </div>
 </x-app-layout>

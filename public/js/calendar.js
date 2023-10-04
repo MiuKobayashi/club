@@ -100,36 +100,40 @@ if (calendarEl != null) {
         selectable: Boolean(isAdmin),
         
         select: function (info) {
-        
-            // 入力ダイアログ
-            const eventName = prompt("イベントを入力してください");
-        
-            if (eventName) {
-
-                // Laravelの登録処理の呼び出し
-                axios
-                    .post("/schedule-add", {
-                        start_date: info.start.valueOf(),
-                        end_date: info.end.valueOf(),
-                        event_name: eventName,
-                        user_id: userId,
-                    })
-                    .then(() => {
-                        // イベントの追加
-                        calendar.addEvent({
-                            title: eventName,
-                            start: info.start.valueOf(),
-                            end: info.end.valueOf(),
-                            allDay: false,
-                        });
-                    })
-                    .catch(() => {
-                        alert("登録できません");
-
-                    });
-            }
+            const check = confirm("全体のイベントですか？");
+            if (check) {
+                // 入力ダイアログ
+                const eventName = prompt("イベントを入力してください");
             
-        
+                if (eventName) {
+                    // イベントが終日の場合は allDay を true に、それ以外の場合は false に設定
+                    const allDay = info.allDay;
+    
+                    // Laravelの登録処理の呼び出し
+                    axios
+                        .post("/schedule-add", {
+                            start_date: info.start.valueOf(),
+                            end_date: info.end.valueOf(),
+                            event_name: eventName,
+                            user_id: userId,
+                            all_day: allDay
+                        })
+                        .then(() => {
+                            // イベントの追加
+                            calendar.addEvent({
+                                title: eventName,
+                                start: info.start.valueOf(),
+                                end: info.end.valueOf(),
+                                allDay: allDay,
+                            });
+                        })
+                        .catch(() => {
+                            alert("登録できません");
+    
+                        });
+                }
+            }    
+            
         },
     
         events: function (info, successCallback, failureCallback) {
@@ -161,7 +165,7 @@ if (calendarEl != null) {
             if (result) {
                 if (info.timeText == "0:00") {
             info.event.setAllDay(true); // 終日のイベントの場合、allDayをtrueに設定
-        }
+            }
                 axios.post("/schedule-delete",{
                         id: info.event.id,
                     })
@@ -177,20 +181,22 @@ if (calendarEl != null) {
     
         //イベントによって色を変える
         eventDidMount: function (info) {
-            if (info.event._def.title=='お稽古') {
-                info.el.style.background='lightskyblue',
-                info.el.style.border='lightskyblue';
-            } else if (info.event._def.title=='合奏練習') {
-                info.el.style.background='thistle',
-                info.el.style.border='thistle';
+            if (info.event.title=='お稽古') {
+                info.el.style.background='#bfccd9';
+                info.el.style.borderColor='#bfccd9';
+                
+            } else if (info.event.title=='合奏練習') {
+                info.el.style.background='#d8bfd8';
+                info.el.style.borderColor='#d8bfd8';
+            } else if (info.event.title=='徽音祭' || info.event.title=='定期演奏会'){
+                info.el.style.background='rosybrown';
+                info.el.style.borderColor='rosybrown';
             } else {
-                info.el.style.background='rosybrown',
-                info.el.style.border='rosybrown';
+                info.el.style.background='#d9bfbf';
+                info.el.style.borderColor='#d9bfbf';
             }
             
-            if (info.timeText == "0:00") {
-                info.event._def.allDay=true;
-            }
+            
         },
         
             }

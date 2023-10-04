@@ -17,9 +17,16 @@ class ScheduleSeeder extends Seeder
     public function run()
     {
         DB::table('schedules')->insert([
-            'event_name' => '合奏練習',
-            'start_date' => date('2023-09-04 10:00:00'),
-            'end_date' => date('2023-09-04 20:00:00'),
+            'event_name' => '徽音祭',
+            'start_date' => date('2023-11-12 00:00:00'),
+            'end_date' => date('2023-11-13 00:00:00'),
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('schedules')->insert([
+            'event_name' => '定期演奏会',
+            'start_date' => date('2023-12-02 00:00:00'),
+            'end_date' => date('2023-12-03 00:00:00'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

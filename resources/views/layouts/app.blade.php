@@ -37,16 +37,33 @@
             border-color: crimson;
             border-width: 5px 0 0;
         }
+        .fc-event {
+            --fc-event-text-color: #58535E;
+            font-weight: bold;
+        }
         </style>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="w-screen min-h-screen bg-red-50 flex">
+    <body class="font-sans antialiased m-0">
+        <div class="w-screen min-h-screen bg-red-50 flex flex-col">
             @include('layouts.navigation')
+        
             <!-- Page Content -->
-            <main class="flex-1 mt-24">
+            <div class="flex-1 h-full">
                 {{ $slot }}
-            </main>
+            </div>
         </div>
-    </body>
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const offset = section.getBoundingClientRect().top - 96;
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    </script>
+</body>
 </html>

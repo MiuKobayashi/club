@@ -1,4 +1,9 @@
 <x-app-layout>
+    <div class="m-5">
+        <a href="/desire" class="hover:underline">Desire</a>
+        ＞
+        <a href="/desire/create" class="text-indigo-800 hover:underline">お稽古の希望時間申請</a>
+    </div>
     <div class="bg-red-50 py-6 sm:py-8 lg:py-12">
         <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
             <!--説明-->
@@ -21,7 +26,7 @@
                 <!--開始時間を選択する-->
                 <div>
                     <label for="desire" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">*何時から</label>
-                    <select id="desire_start" name="desire[start_time]" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <select id="desire_start" name="desire[start_time]" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="display: none;">選択してください</option>
                         <option value="09:00:00">9:00</option>
                         <option value="10:40:00">10:40</option>
@@ -37,7 +42,7 @@
                 <!--終了時間を選択する-->
                 <div>
                     <label for="desire" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">*何時まで</label>
-                    <select id="desire_end" name="desire[end_time]" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <select id="desire_end" name="desire[end_time]" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                         <option value="" style="display: none;">選択してください</option>
                         <option value="10:30:00">10:30</option>
                         <option value="12:10:00">12:10</option>
@@ -61,9 +66,38 @@
                     <span class="text-sm text-gray-500">*Required</span>
                 </div>
             </form>
-            
         </div>
-    </div>    
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var startSelect = document.getElementById("desire_start");
+            var endSelect = document.getElementById("desire_end");
+    
+            startSelect.addEventListener("change", function() {
+                var selectedStartTime = startSelect.value;
+                
+                endSelect.innerHTML = "";
+                
+                var defaultOption = document.createElement("option");
+                defaultOption.value = "";
+                defaultOption.textContent = "選択してください";
+                endSelect.appendChild(defaultOption);
+    
+                var endTimeOptions = [
+                    "10:30:00", "12:10:00", "13:10:00", "14:50:00", "16:30:00", "19:00:00", "20:00:00"
+                ];
+    
+                for (var i = 0; i < endTimeOptions.length; i++) {
+                    if (endTimeOptions[i] > selectedStartTime) {
+                        var option = document.createElement("option");
+                        option.value = endTimeOptions[i];
+                        option.textContent = endTimeOptions[i].substring(0, 5);
+                        endSelect.appendChild(option);
+                    }
+                }
+            });
+        });
+    </script>
 </x-app-layout>
 
 

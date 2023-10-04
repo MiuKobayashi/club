@@ -19,7 +19,7 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('schedule_id')->constrained();
+            $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
             $table->string('remarks', 200)->nullable(true);
         });
     }

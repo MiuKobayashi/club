@@ -1,11 +1,29 @@
+@php
+    $buttons = [
+        ['label' => '活動の登録', 'sectionId' => 'nextMonthCalendar'],
+        ['label' => '希望時間', 'sectionId' => 'allTimeTable'],
+        ['label' => '部員名簿', 'sectionId' => 'memberList'],
+    ];
+@endphp
 <x-app-layout>
+    <div class="bg-red-100 w-screen h-auto -mt-8 fixed t-24 z-50">
+        <div class="ml-60">
+            @foreach ($buttons as $button)
+                |
+                <button onclick="scrollToSection('{{$button['sectionId']}}')" class="text-gray-700 hover:underline">
+                    {{ $button['label'] }}
+                </button>
+                |
+            @endforeach
+        </div>
+    </div>
     <div class="m-5">
-        <h2 class="mt-5 mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">活動の登録</h2>
+        <h2 id="nextMonthCalendar" class="mt-5 mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">活動の登録</h2>
         <div class="flex justify-center">
             <div class="mr-auto">
                 <div class="sticky top-24">
                     <p class="font-semibold">部員名：</p>
-                    <select name="desire['user_id']" id='user_id' class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <select name="desire['user_id']" id='user_id' class="w-10 mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="">選択してください</option>
                         @foreach($users as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -15,21 +33,21 @@
                     <button id="allLessons" class="m-3 inline-block rounded-lg border-2 border-transparent bg-pink-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-900 transition duration-100 hover:bg-pink-700 focus:border-red-50 focus:bg-pink-700 focus-visible:ring md:text-base">部員の予定</button>
                 </div>
             </div>
-        <script>
-            let isAdmin = {{auth()->user()->admin}};
-            let Duration = '00:10:00';
-        </script>
-        <script src="{{ asset('/js/calendar.js') }}"></script>
-        <div id='calendar' class="m-5 bg-white md:w-9/12 w-fit min-w-10 border-2 border-opacity-50 border-pink-900 rounded-lg"></div>
+            <script>
+                let isAdmin = {{auth()->user()->admin}};
+                let Duration = '00:10:00';
+            </script>
+            <script type="module" src="{{ asset('/js/calendar.js') }}"></script>
+            <div id='calendar' class="m-5 p-5 bg-white md:w-9/12 w-fit min-w-10 border-2 border-opacity-50 border-pink-900 rounded-lg"></div>
         </div>
-        <h1 class="mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">希望時間</h1>
+        <h1 id="allTimeTable" class="mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">希望時間</h1>
         <div class="flex justify-center">
             <div class="max-w-fit">
                 @if($attendances->isEmpty())
                     <p class="font-semibold">申請された希望時間はありません。</p>
                 @else
                     @foreach($attendances as $attendance)
-                    <h1 class="font-bold">{{ $attendance->start_date->format('Y/m/d') }}</h1>
+                    <h1 class="mt-10 font-bold">{{ $attendance->start_date->format('Y/m/d') }}</h1>
                     <div class="m-2.5 flex justify-center">
                         <table class="flex justify-center">
                             <tr class="border-b-4 border-red-300">
@@ -65,8 +83,7 @@
                 @endif
             </div>
         </div>
-        <a href='/admin/create' class="hover:underline">お稽古登録・お知らせ投稿はこちら</a>
-        <h1 class="mt-10 mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">部員名簿</h1>
+        <h1 id="memberList" class="mt-10 mb-4 text-left text-2xl font-bold text-pink-800 md:mb-6 lg:text-3xl underline">部員名簿</h1>
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div class="flex justify-center">
                 <table class="min-w-50 text-center border-separate">

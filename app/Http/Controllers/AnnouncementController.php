@@ -21,6 +21,25 @@ class AnnouncementController extends Controller
     {
         $input = $request['announcement'];
         $announcement->fill($input)->save();
-        return redirect('/admin');
+        return redirect('/');
+    }
+    
+    public function edit(Announcement $announcement)
+    {
+        return view('lessons.announcement_edit')->with(['announcements' => $announcement]);
+    }
+    
+    public function update(AnnouncementRequest $request, Announcement $announcement)
+    {
+        $input = $request['announcement'];
+        $announcement->fill($input)->save();
+        
+        return redirect('/');
+    }
+    
+    public function delete(Announcement $announcement)
+    {
+        $announcement->delete();
+        return redirect('/');
     }
 }
