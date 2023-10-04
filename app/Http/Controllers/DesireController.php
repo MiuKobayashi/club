@@ -35,6 +35,12 @@ class DesireController extends Controller
             $query->where('user_id', auth()->user()->id);
         }])->get();
         
+        $allAttendance = Schedule::whereBetween('start_date',[$StartMonth,$EndMonth])
+        ->where('event_name',"お稽古")
+        ->where('user_id', NULL)
+        ->orderBy('start_date')
+        ->with('desires')->get();
+        
 
         $startTime = [date('09:00:00'), date('10:40:00'), date('12:20:00'), date('13:20:00'), date('15:00:00'), date('16:40:00'), date('18:20:00'), date('19:00:00')];
         $endTime = [date('10:30:00'), date('12:10:00'), date('13:10:00'), date('14:50:00'), date('16:30:00'), date('18:10:00'), date('19:00:00'), date('20:00:00')];
@@ -42,6 +48,7 @@ class DesireController extends Controller
         return view('lessons.desire')->with([
             'absences' => $absence,
             'attendances' => $attendance,
+            'allAttendances' => $allAttendance,
             'startTime' => $startTime,
             'endTime' => $endTime,
             'Time' => $Time,
