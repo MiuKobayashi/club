@@ -100,12 +100,13 @@ if (calendarEl != null) {
         selectable: Boolean(isAdmin),
         
         select: function (info) {
-        
             // 入力ダイアログ
             const eventName = prompt("イベントを入力してください");
         
             if (eventName) {
-
+                // イベントが終日の場合は allDay を true に、それ以外の場合は false に設定
+                const allDay = info.allDay;
+        
                 // Laravelの登録処理の呼び出し
                 axios
                     .post("/schedule-add", {
@@ -113,6 +114,7 @@ if (calendarEl != null) {
                         end_date: info.end.valueOf(),
                         event_name: eventName,
                         user_id: userId,
+                        all_day: allDay, // 終日イベントかどうかをセット
                     })
                     .then(() => {
                         // イベントの追加
@@ -120,17 +122,15 @@ if (calendarEl != null) {
                             title: eventName,
                             start: info.start.valueOf(),
                             end: info.end.valueOf(),
-                            allDay: false,
+                            allDay: allDay, // allDay プロパティを設定
                         });
                     })
                     .catch(() => {
                         alert("登録できません");
-
                     });
             }
-            
-        
         },
+
     
         events: function (info, successCallback, failureCallback) {
             //デフォルトのURL
@@ -175,26 +175,24 @@ if (calendarEl != null) {
             }
         },
     
-        //イベントによって色を変える
-        eventDidMount: function (info) {
-            if (info.event._def.title=='お稽古') {
-                info.el.style.background='lightskyblue',
-                info.el.style.border='lightskyblue';
-            } else if (info.event._def.title=='合奏練習') {
-                info.el.style.background='thistle',
-                info.el.style.border='thistle';
-            } else {
-                info.el.style.background='rosybrown',
-                info.el.style.border='rosybrown';
-            }
-            
-            if (info.timeText == "0:00") {
-                info.event._def.allDay=true;
-            }
-        },
-        
-            }
-        );
+            //イベントによって色を変える
+            eventDidMount: function (info) {
+                if (info.event._def.title=='お稽古') {
+                    info.el.style.background='#bfccd9',
+                    info.el.style.borderColor='#bfccd9',
+                    info.el.style.color='#58535E';
+                } else if (info.event._def.title=='合奏練習') {
+                    info.el.style.background='#d8bfd8',
+                    info.el.style.borderColor='#d8bfd8',
+                    info.el.style.color='#58535E';
+                } else {
+                    info.el.style.background='#d9bfbf',
+                    info.el.style.border='#d9bfbf',
+                    info.el.style.color='#58535E';
+                }
+            },        
+        }
+    );
     
         calendar.render();
     }

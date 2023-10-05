@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Desire;
 use App\Models\Schedule;
 use App\Models\User;
+use App\Models\Announcement;
 use Carbon\Carbon;
 
 class DesireController extends Controller
@@ -55,7 +56,7 @@ class DesireController extends Controller
             ]);
     }
     
-    public function admin(Schedule $schedule, User $user)
+    public function admin(Schedule $schedule, User $user, Announcement $announcement)
     {
         $user = User::get();
         $startTime = [date('09:00:00'), date('10:40:00'), date('12:20:00'), date('13:20:00'), date('15:00:00'), date('16:40:00'), date('18:20:00'), date('19:00:00')];
@@ -76,6 +77,7 @@ class DesireController extends Controller
             'endTime' => $endTime,
             'Time' => $Time,
             'attendances' => $attendance,
+            'announcements' => $announcement->getPaginateByLimit(),
             ]);
 
     }

@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Song extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'performance',
+    ];
     
     //part_songテーブルに対するリレーション(主)
     public function song_part()

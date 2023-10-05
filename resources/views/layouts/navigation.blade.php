@@ -103,6 +103,20 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('home')">
+                    {{ __('Home') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('progress')">
+                    {{ __('Progress') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('desire')">
+                    {{ __('Desire') }}
+                </x-responsive-nav-link>
+                @if(auth()->user()->admin)
+                    <x-responsive-nav-link :href="route('admin')">
+                        {{ __('Admin') }}
+                    </x-responsive-nav-link>
+                @endif
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

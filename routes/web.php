@@ -39,6 +39,13 @@ Route::controller(PracticeSongController::class)->middleware(['auth'])->group(fu
     Route::post('/progress', 'done')->name('done');
 });
 
+Route::controller(PracticeSongController::class)->middleware(['auth','admin'])->group(function(){
+    //曲目登録画面（管理者）
+    Route::get('/progress/song', 'newSong');
+    Route::post('/progress/song', 'newSongStore')->name('newSongStore');
+    Route::post('/progress/song/practice', 'newPracticeStore')->name('newPracticeStore');
+});
+
 //希望日程確認画面
 Route::get('/desire', [DesireController::class, 'desire'])->name('desire')->middleware('auth');
 
@@ -60,8 +67,9 @@ Route::controller(AnnouncementController::class)->middleware('auth')->group(func
     //お知らせ登録
     Route::get('/admin/create', 'create');
     // //お知らせ編集
-    // Route::get('/admin/edit', [AnnouncementController::class, 'edit']);
-    // Route::put('/admin', [AnnouncementController::class, 'update']);
+    Route::get('/admin/{announcement}/edit', 'edit');
+    Route::put('/admin/{announcement}', 'update');
+    Route::delete('/admin/{announcement}', 'delete');
 });
 
 Route::controller(ScheduleController::class)->middleware('auth')->group(function(){

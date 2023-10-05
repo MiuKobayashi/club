@@ -47,21 +47,33 @@ class ScheduleController extends Controller
         $start_date = date('Y-m-d H:i:s', $request->input('start_date') / 1000);
         $end_date = date('Y-m-d H:i:s', $request->input('end_date') / 1000);
         
-        
-        return Schedule::query()
-            ->select(
-                //fullCalendarの形式に
-                'id',
-                'start_date as start',
-                'end_date as end',
-                'event_name as title'
-            )
-            //FullCalendarの表示範囲を表示
+        $events = Schedule::query()
+            ->select('id', 'event_name as title', 'start_date', 'end_date')
             ->where('user_id', auth()->user()->id)
-            ->orWhere('user_id', NULL)
+            ->orWhereNull('user_id')
             ->where('end_date', '>', $start_date)
             ->where('start_date', '<', $end_date)
             ->get();
+        
+        $formattedEvents = $events->map(function ($event) {
+            $start = Carbon::parse($event->start_date);
+            $end = Carbon::parse($event->end_date);
+        
+            // もし時刻が '00:00:00' であれば日付のみにフォーマット
+            if ($start->format('H:i:s') === '00:00:00' && $end->format('H:i:s') === '00:00:00') {
+                $event->start = $start->format('Y-m-d');
+                $event->end = $end->format('Y-m-d');
+            } else {
+                // それ以外の場合はそのままフォーマット
+                $event->start = $start->format('Y-m-d H:i:s');
+                $event->end = $end->format('Y-m-d H:i:s');
+            }
+
+            return $event;
+        });
+
+        return response()->json($formattedEvents);
+        
     }
     
     public function scheduleGetAll(Request $request)
