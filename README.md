@@ -1,5 +1,7 @@
 # Sakura STLINKS
-<!-- <img src="https://user-images.githubusercontent.com/70557787/192438298-8fe3a089-96ca-4bed-a420-8a7ef6d3d25b.png"> -->
+![ホーム画面](public/images/home1.png "home1")
+![ホーム画面](public/images/home2.png "home2")
+![ホーム画面](public/images/home3.png "home3")
 
 ## 概要
 所属する箏曲部のための、サークル活動サポートアプリ
@@ -8,9 +10,9 @@
 
 サイトURL：https://sakurastlinks-8ce811838701.herokuapp.com<br>
 **※ログインが必須となるため、ご覧になりたい場合は以下のテストアカウントにてログインしてください。**
-・Name：test
-・Email：test@email.com
-・Password：test2025
+- Name：test
+- Email：test@email.com
+- Password：test2025
 <hr>
 
 ## 制作の動機
