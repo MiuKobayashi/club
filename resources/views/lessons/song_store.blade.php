@@ -8,13 +8,40 @@
             <div class="mb-10 md:mb-16">
                 <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">曲・パートの登録</h2>
                     <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">新しい曲とパートを登録してください。</p>
-            </div>    
-            <form action="{{ route('newSongStore') }}" method="POST" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+            </div>
+            
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-2xl">YouTube Search</h2>
+                    <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">曲目の動画を検索してください。</p>
+            </div>
+            <form action="{{ route('songSearch') }}" method="get" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+                <input type="text" name="word" placeholder="Search YouTube videos" class="w-full rounded border border-gray-300 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" value="{{ old('word', $searchQuery)}}">
+                <button type="submit" class="inline-block rounded-lg bg-pink-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-700 transition duration-100 hover:bg-pink-700 focus-visible:ring active:bg-pink-700 md:text-base">Search</button>
+            </form>
+            
+            <h2 class="mt-10 mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-2xl">YouTube Video</h2>
+            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">検索結果上位３件が表示されます。</p>
+                @if ($videos && !empty($searchQuery))
+                    <div class="flex">
+                        @foreach($videos as $video)
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $video['id']['videoId'] }}" frameborder="0" allowfullscreen></iframe>
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-center text-4xl mt-5 text-red-900">No video found.</p>
+                @endif
+
+            
+            <form action="{{ route('newSongStore') }}" method="POST" class="mt-10 mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
                 @csrf
                 <div>
                     <label for="newSongName" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">*曲名</label>
-                    <input type="text" name="newSong[name]" placeholder="曲名" class="w-full rounded border border-gray-300 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" value="{{ old('newSong.name' )}}"/>
+                    <input type="text" name="newSong[name]" placeholder="曲名" class="w-full rounded border border-gray-300 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
+                        value="{{ $searchQuery }}"/>
                     <p class="newSong__error" style="color: darkred">{{ $errors->first('newSong.name') }}</p>
+                    <label for="newSongURL" class="mt-2 mb-2 inline-block text-sm text-gray-800 sm:text-base">URL</label>
+                    <input type="text" name="newSong[url]" placeholder="URL" class="w-full rounded border border-gray-300 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"/>
+                    <p class="newSong__error" style="color: darkred">{{ $errors->first('newSong.url') }}</p>
                 </div>
                 <div>
                     <label for="newSongPart" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">*パート</label>
@@ -22,7 +49,7 @@
                         @foreach($parts as $part)
                             <label class="block"><input type="checkbox" name="newPart[id][]" class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-red-300" value="{{ $part->id }}">{{$part->name}}</label>
                         @endforeach
-                        <p class="part__error" style="color: darkred">{{ $errors->first('newPart.id') }}</p>
+                        <p class="newPart__error" style="color: darkred">{{ $errors->first('newPart.id') }}</p>
                     </div>
                 </div>
                 <div class="flex items-center justify-end sm:col-span-2">
@@ -33,6 +60,7 @@
             <div class="mb-10 md:mb-16">
                 <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">部員の曲・パートの登録</h2>
             </div>    
+            
             <form action="{{ route('newPracticeStore') }}" method="POST" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
                 @csrf
                 <div>
@@ -43,8 +71,10 @@
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
-                    <p class="newSong__error" style="color:darkred">{{ $errors->first('newSong.name') }}</p>
+                    <p class="newPracticeUser__error" style="color: darkred">{{ $errors->first('newPractice.user_id') }}</p>
                 </div>
+                
+
                 <div>
                     <label for="newSongName" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">*曲名</label>
                     <select id="newPracticeSong" name="newPractice[song_id]" id="newSong" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -53,20 +83,22 @@
                             <option value="{{ $performance->id }}">{{ $performance->name }}</option>
                         @endforeach
                     </select>
-                    <p class="newSong__error" style="color:darkred">{{ $errors->first('newSong.name') }}</p>
+                    <p class="newPracticeSong__error" style="color: darkred">{{ $errors->first('newPractice.song_id') }}</p>
                 </div>
                 <div>
                     <label for="newSongPart" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">*パート</label>
                     <select id="newPracticePart" name="newPractice[part_id]" id="newPart" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="" style="display: none;">選択してください</option>
                     </select>
-                    <p class="part__error" style="color:darkred">{{ $errors->first('newPart.name') }}</p>
+                    <p class="newPracticePart__error" style="color: darkred">{{ $errors->first('newPractice.part_id') }}</p>
                 </div>
                 <div class="flex items-center justify-end sm:col-span-2">
                     <button type="submit" class="inline-block rounded-lg bg-pink-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-700 transition duration-100 hover:bg-pink-700 focus-visible:ring active:bg-pink-700 md:text-base">登録</button>
                 </div>
                     <span class="text-sm text-gray-500">*Required</span>
             </form>
+            
+
             <div class="mx-10 mt-5 flex justify-end hover:underline text-indigo-600 font-semibold ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -107,5 +139,7 @@
             // 初期状態で連動を行うために、ページ読み込み時に一度changeイベントを発生させる
             newPracticeSongSelect.dispatchEvent(new Event("change"));
         });
+        
+        
     </script>
 </x-app-layout>

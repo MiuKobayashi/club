@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PracticeSongRequest extends FormRequest
+class SongPartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,6 @@ class PracticeSongRequest extends FormRequest
         return [
             'progress.song_id' => 'required',
             'progress.part_id' => 'required',
-            'newSong.name' => 'required|string|max:30',
-            'newPart.id' => 'required',
-            'newPractice.user_id' => 'required',
-            'newPractice.song_id' => 'required',
-            'newPractice.part_id' => 'required',
         ];
     }
 }

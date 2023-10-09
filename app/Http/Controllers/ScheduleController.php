@@ -9,10 +9,10 @@ use App\Models\Schedule;
 use App\Models\User;
 use App\Models\Desire;
 use App\Models\Announcement;
-use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
+    //FullCalendarイベント登録
     public function scheduleAdd(Request $request, User $user)
     {   
         // バリデーションで32文字以上を制限
@@ -35,6 +35,7 @@ class ScheduleController extends Controller
         return;
     }
     
+    //FullCalendarイベント表示（自分）
     public function scheduleGet(Request $request)
     {
         // バリデーションで32文字以上を制限
@@ -42,40 +43,19 @@ class ScheduleController extends Controller
             'start_date' => 'required|integer',
             'end_date' => 'required|integer',
         ]);
-        
-        //カレンダー表示期間
+    
         $start_date = date('Y-m-d H:i:s', $request->input('start_date') / 1000);
         $end_date = date('Y-m-d H:i:s', $request->input('end_date') / 1000);
-        
-        $events = Schedule::query()
-            ->select('id', 'event_name as title', 'start_date', 'end_date')
-            ->where('user_id', auth()->user()->id)
-            ->orWhereNull('user_id')
-            ->where('end_date', '>', $start_date)
-            ->where('start_date', '<', $end_date)
-            ->get();
-        
-        $formattedEvents = $events->map(function ($event) {
-            $start = Carbon::parse($event->start_date);
-            $end = Carbon::parse($event->end_date);
-        
-            // もし時刻が '00:00:00' であれば日付のみにフォーマット
-            if ($start->format('H:i:s') === '00:00:00' && $end->format('H:i:s') === '00:00:00') {
-                $event->start = $start->format('Y-m-d');
-                $event->end = $end->format('Y-m-d');
-            } else {
-                // それ以外の場合はそのままフォーマット
-                $event->start = $start->format('Y-m-d H:i:s');
-                $event->end = $end->format('Y-m-d H:i:s');
-            }
-
-            return $event;
-        });
-
+    
+        // ログインユーザーの ID を取得
+        $userId = auth()->user()->id;
+    
+        $formattedEvents = Schedule::getFormattedEvents($start_date, $end_date, $userId);
+    
         return response()->json($formattedEvents);
-        
     }
     
+    //FullCalendarイベント表示（全員）
     public function scheduleGetAll(Request $request)
     {
         // バリデーションで32文字以上を制限
@@ -83,27 +63,16 @@ class ScheduleController extends Controller
             'start_date' => 'required|integer',
             'end_date' => 'required|integer',
         ]);
-        
-        //カレンダー表示期間
+    
         $start_date = date('Y-m-d H:i:s', $request->input('start_date') / 1000);
         $end_date = date('Y-m-d H:i:s', $request->input('end_date') / 1000);
-        
-
-        return Schedule::query()
-            ->select(
-                //fullCalendarの形式に
-                'id',
-                'start_date as start',
-                'end_date as end',
-                'event_name as title',
-            )
-            //FullCalendarの表示範囲を表示
-            ->where('end_date', '>', $start_date)
-            ->where('start_date', '<', $end_date)
-            ->get();
-    }
-
     
+        $formattedEvents = Schedule::getFormattedEvents($start_date, $end_date);
+    
+        return response()->json($formattedEvents);
+    }
+    
+    //FullCalendarイベント削除
     public function scheduleDelete(Request $request)
     {   
         $schedule = Schedule::find($request->id);
@@ -114,8 +83,59 @@ class ScheduleController extends Controller
             return response()->json(['message' => 'Event not found'], 404);
         }
     }
+    
+    //お稽古希望日時画面
+    public function desireView(Schedule $schedule)
+    {
+        //今月の自分の活動日
+        $absence = $schedule->selectThisMonthLessons()->get();
+        
+        //来月の自分の活動日
+        $attendance = $schedule->selectNextMonthLessons()
+                                ->with(['desires'=> function ($query) {
+                                    $query->where('user_id', auth()->user()->id);
+                                }])->get();
+        
+        //来月の全体の活動日
+        $allAttendance = $schedule->selectNextMonthLessons()
+                                  ->with('desires')
+                                  ->get();
+        
+        $times = Schedule::getTimes();
+        
+        $startTime = $times['startTime'];
+        $endTime = $times['endTime'];
+        $Time = $times['Time'];
+        
+        return view('lessons.desire')->with([
+            'absences' => $absence,
+            'attendances' => $attendance,
+            'allAttendances' => $allAttendance,
+            'startTime' => $startTime,
+            'endTime' => $endTime,
+            'Time' => $Time,
+            ]);
+    }
+    
+    //お稽古希望日時登録画面
+    public function desireCreateView(Schedule $schedule)
+    {
+        //来月の活動日
+        $attendance = $schedule ->selectNextMonthLessons()
+                                ->with(['desires'=> function ($query) {
+                                    $query->where('user_id', auth()->user()->id);
+                               }])
+                                ->get();
+        
+        $Time = ['09:00-10:30','10:40-12:10','12:20-13:10','13:20-14:50','15:00-16:30','16:40-18:10','18:20-19:00','19:00-20:00'];
 
-    public function store(DesireRequest $request, Desire $desire)
+        return view('lessons.desire_create')->with([
+            'attendances' => $attendance,
+            'Time' => $Time,
+            ]);
+    }
+    
+    public function desireCreateStore(DesireRequest $request, Desire $desire)
     {
         $input = $request['desire'];
         $desire->fill($input);
@@ -123,26 +143,6 @@ class ScheduleController extends Controller
         $desire->save();
         return redirect('/desire/create');
     }
-
-    public function desireCreate(Schedule $schedule)
-    {
-        //来月の活動日
-        $StartMonth = Carbon::now()->startOfMonth()->addMonthNoOverflow()->toDateString();
-        $EndMonth = Carbon::now()->endOfMonth()->addMonthNoOverflow()->toDateString();
-        $attendance = Schedule::whereBetween('start_date',[$StartMonth,$EndMonth])
-        ->where('event_name',"お稽古")
-        ->where('user_id', NULL)
-        ->orderBy('start_date')
-        ->with(['desires'=> function ($query) {
-            $query->where('user_id', auth()->user()->id);
-        }])->get();
-        
-
-        return view('lessons.desire_create')->with([
-            'attendances' => $attendance,
-            ]);
-    }
-
     
     public function delete(Request $request, Schedule $schedule)
     {
@@ -154,21 +154,17 @@ class ScheduleController extends Controller
     
     public function countAttendance(Announcement $announcement, Schedule $schedule)
     {
-        $announce = new Announcement();
-        $announcement = $announce->getPaginateByLimit();
+        $announcements = $announcement->getPaginateByLimit();
         
         //今月の活動日
-        $StartMonth = Carbon::now()->startOfMonth()->toDateString();
-        $EndMonth = Carbon::now()->endOfMonth()->toDateString();
-        $attendance = Schedule::whereBetween('start_date',[$StartMonth,$EndMonth])
-        ->where('event_name',"お稽古")
-        ->where('user_id', auth()->user()->id )
-        ->where('deleted_at', NULL)
-        ->count();
+        $attendance = $schedule
+            ->selectThisMonthLessons()
+            ->where('deleted_at', NULL)
+            ->count();
         $amount = 1000*$attendance;
 
         return view('lessons.home')->with([
-            'announcements' => $announcement,
+            'announcements' => $announcements,
             'attendances' => $attendance,
             'amount' => $amount]);
         

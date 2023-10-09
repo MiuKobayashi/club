@@ -21,6 +21,8 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => TRUE,
+            'url' => 'https://youtu.be/y7YH_5K1G6U?si=_R7NmdL_hhD4AmTd',
+            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/y7YH_5K1G6U?si=3yvhtm8n_xrDleZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '花筏',
@@ -33,6 +35,8 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => TRUE,
+            'url' => 'https://youtu.be/90evCJHDB4A?si=dxRHOfPlhLA_ZnO6',
+            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/90evCJHDB4A?si=dxRHOfPlhLA_ZnO6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '夜空ノムコウ',
@@ -81,12 +85,15 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => TRUE,
+            'url' => 'https://youtu.be/Rzzr7LudUJA?si=grfOcMoRvw7w3paC',
         ]);
         DB::table('songs')->insert([
             'name' => '人生のメリーゴーランド',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => TRUE,
+            'url' => 'https://youtu.be/LczZznH1yLY?si=a76DeUOb6kqW_x5n',
+            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/LczZznH1yLY?si=a76DeUOb6kqW_x5n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '地上の星',
@@ -99,6 +106,8 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => TRUE,
+            'url' => 'https://youtu.be/Y_Db88Ef6FQ?si=lSw1my8xd5AFtb2e',
+            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/Y_Db88Ef6FQ?si=w9P5EiCDoDcKEPv5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '弦鳴',

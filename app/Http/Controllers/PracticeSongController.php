@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\PracticeSongRequest;
+use Illuminate\Support\Facades\Http;
+use App\Http\Requests\SongPartRequest;
+use App\Http\Requests\NewSongRequest;
+use App\Http\Requests\NewPracticeRequest;
 use App\Models\Song;
 use App\Models\PracticeSong;
 use App\Models\User;
@@ -11,19 +14,20 @@ use App\Models\Part;
 
 class PracticeSongController extends Controller
 {
-     public function store(PracticeSongRequest $request, PracticeSong $practicesong)
+    //お稽古で練習中の曲の登録
+    public function progressCreateStore(SongPartRequest $request, PracticeSong $practicesong)
     {
-        $practicesong->where('user_id',auth()->id())
-        ->update([
-            'inprogress' => 0
-            ]);
-            
+        //現在練習中となっている曲をすべて練習中ではない登録
+        $practicesong->notInProgress();
+                       
+        //練習中の登録  
         $input = $request['progress'];
         $practicesong->fill($input);
         $practicesong
         ->where([
-            ['user_id','=',auth()->id()],
-            ['song_id', '=', $input["song_id"]]
+            ['user_id', auth()->id()],
+            ['song_id', $input["song_id"]],
+            ['part_id', $input["part_id"]]
         ])
         ->update([
             'inprogress' => 1
@@ -31,31 +35,53 @@ class PracticeSongController extends Controller
         return redirect('/progress');
     }
     
-    public function done(Request $request, PracticeSong $practicesong)
+    //お稽古で練習中の曲の完了
+    public function progressDone(PracticeSong $practicesong)
     {   
-        $input = $request['progress'];
-        $practicesong->fill($input);
-        $practicesong->where('user_id',auth()->id())
-        ->update([
-            'inprogress' => 0
-            ]);
+        $practicesong->notInProgress();
         return redirect('/progress');
     }
     
-    public function newSong()
+    public function progressSongCreateView(Request $request, User $user, Song $song, Part $part)
     {
-        $part = Part::get();
-        $user = User::get();
-        $performance = Song::where('performance',1)->with('parts')->get();
+        //部員
+        $users = $user->getMembers();
 
+        //本番の曲
+        $performance = $song->selectPerformance()
+                            ->get();
         
+        // 検索ワードを取得
+        $searchQuery = $request->input('word', '');
+        $kotoSearchQuery = null;
+        if(!empty($searchQuery)) {
+            $kotoSearchQuery = $searchQuery . " 箏";
+        }
+        $apiKey = config('services.youtube.api_key');
+
+        $response = Http::get('https://www.googleapis.com/youtube/v3/search', [
+            'q' => $kotoSearchQuery,
+            'key' => $apiKey,
+            'part' => 'snippet',
+            'type' => 'video',
+        ]);
+
+        $data = $response->json();
+        
+        $topThreeVideos = [];
+        if (isset($data['items'])) {
+            $topThreeVideos = array_slice($data['items'], 0, 3);
+        }
+
         return view('lessons.song_store')->with([
-            'parts' => $part,
-            'users' => $user,
-            'performances' => $performance]);
+            'parts' => $part->get(),
+            'users' => $users,
+            'performances' => $performance,
+            'videos' => $topThreeVideos,
+            'searchQuery' => $searchQuery]);
     }
     
-    public function newSongStore(PracticeSongRequest $request, Song $song)
+    public function progressSongCreateStore(NewSongRequest $request, Song $song)
     {
         // 曲名を保存
         $input_song = $request->input('newSong');
@@ -70,7 +96,7 @@ class PracticeSongController extends Controller
         return redirect('/progress/song');
     }
     
-    public function newPracticeStore(PracticeSongRequest $request, PracticeSong $practicesong)
+    public function progressSongPracticeStore(NewPracticeRequest $request, PracticeSong $practicesong)
     {
         // 曲名を保存
         $input_practicesong = $request->input('newPractice');

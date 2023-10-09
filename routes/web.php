@@ -27,39 +27,40 @@ Route::get('/', [ScheduleController::class, 'countAttendance'])
 
 Route::controller(SongController::class)->middleware(['auth'])->group(function(){
     //進捗状況画面
-    Route::get('/progress', 'progress')->name('progress');
+    Route::get('/progress', 'progressView')->name('progress');
     //進捗状況登録画面
-    Route::get('/progress/create', 'songs');
+    Route::get('/progress/create', 'progressCreateView');
+    //曲目動画一覧画面
+    Route::get('/progress/movie', 'progressMovieView')->name('movie');
 });
 
 Route::controller(PracticeSongController::class)->middleware(['auth'])->group(function(){
     //進捗状況登録画面（登録）
-    Route::post('/progress/create', 'store')->name('songStore');
+    Route::post('/progress/create', 'progressCreateStore')->name('songStore');
     //進捗状況登録画面（完了）
-    Route::post('/progress', 'done')->name('done');
+    Route::post('/progress', 'progressDone')->name('done');
 });
 
 Route::controller(PracticeSongController::class)->middleware(['auth','admin'])->group(function(){
     //曲目登録画面（管理者）
-    Route::get('/progress/song', 'newSong');
-    Route::post('/progress/song', 'newSongStore')->name('newSongStore');
-    Route::post('/progress/song/practice', 'newPracticeStore')->name('newPracticeStore');
+    Route::get('/progress/song', 'progressSongCreateView')->name('songSearch');
+    Route::post('/progress/song', 'progressSongCreateStore')->name('newSongStore');
+    Route::post('/progress/song/practice', 'progressSongPracticeStore')->name('newPracticeStore');
 });
 
 //希望日程確認画面
-Route::get('/desire', [DesireController::class, 'desire'])->name('desire')->middleware('auth');
-
 Route::controller(ScheduleController::class)->middleware(['auth'])->group(function(){
+    Route::get('/desire', 'desireView')->name('desire');
     //希望日程登録画面
-    Route::get('/desire/create', 'desireCreate')->name('create');
-    Route::post('/desire/create', 'store')->name('desireStore');
+    Route::get('/desire/create', 'desireCreateView')->name('desireCreate');
+    Route::post('/desire/create', 'desireCreateStore')->name('desireStore');
     Route::delete('/desire', 'delete')->name('absenceDelete');
 });
 
 //管理者画面
 Route::middleware(['auth', 'admin'])
 ->group(function () {
-    Route::get('/admin', [DesireController::class, 'admin'])->name('admin');
+    Route::get('/admin', [DesireController::class, 'adminView'])->name('admin');
     Route::post('/admin', [AnnouncementController::class, 'store']);
 });
 
@@ -74,16 +75,16 @@ Route::controller(AnnouncementController::class)->middleware('auth')->group(func
 
 Route::controller(ScheduleController::class)->middleware('auth')->group(function(){
     //FullCalendarイベント登録
-    Route::get('/schedule-add', 'scheduleAdd')->name('schedule-add');
+    Route::get('/schedule-add', 'scheduleAdd');
     Route::post('/schedule-add', 'scheduleAdd')->name('schedule-add');
     //FullCalendarイベント取得
-    Route::get('/schedule-get', 'scheduleGet')->name('schedule-get');
+    Route::get('/schedule-get', 'scheduleGet');
     Route::post('/schedule-get', 'scheduleGet')->name('schedule-get');
-    Route::get('/schedule-getAll', 'scheduleGetAll')->name('schedule-getAll');
+    Route::get('/schedule-getAll', 'scheduleGetAll');
     Route::post('/schedule-getAll', 'scheduleGetAll')->name('schedule-getAll');
     
     //FullCalendarイベント削除
-    Route::get('/schedule-delete', 'scheduleDelete')->name('schedule-delete');
+    Route::get('/schedule-delete', 'scheduleDelete');
     Route::post('/schedule-delete', 'scheduleDelete')->name('schedule-delete');
 });
 

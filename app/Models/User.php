@@ -81,4 +81,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(AnnouncementRead::class);
     }
+    
+    //練習中の曲を取得する関数
+    public function getInprogress()
+    {
+        return $this->with(['practicesongs'=> function ($query) {
+                        $query->where('inprogress',true)->with(['song','part']);
+                        }])->get();
+    }
+    
+    //部員を取得する関数
+    public function getMembers()
+    {
+        return $this->orderBy('year', 'DESC')->get();
+    }
+
 }

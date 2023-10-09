@@ -1,33 +1,10 @@
-@php
-    $buttons = [
-        ['label' => '申請内容', 'sectionId' => 'myTime'],
-        ['label' => '部員の申請内容', 'sectionId' => 'allTime'],
-        ['label' => '今月の出欠', 'sectionId' => 'thisMonthAbsence'],
-    ];
-@endphp
-@php
-    $buttons = [
-        ['label' => '申請内容', 'sectionId' => 'myTime'],
-        ['label' => '部員の申請内容', 'sectionId' => 'allTime'],
-        ['label' => '今月の出欠', 'sectionId' => 'thisMonthAbsence'],
-    ];
-@endphp
 <x-app-layout>
-    <!--<div class="bg-red-100 w-screen h-auto -mt-8 fixed t-24 z-50">-->
-    <!--    <div class="ml-60">-->
-    <!--        @foreach ($buttons as $button)-->
-    <!--            |-->
-    <!--            <button onclick="scrollToSection('{{$button['sectionId']}}')" class="text-gray-700 hover:underline">-->
-    <!--                {{ $button['label'] }}-->
-    <!--            </button>-->
-    <!--            |-->
-    <!--        @endforeach-->
-    <!--    </div>-->
-    <!--</div>-->
     <div class="m-5">
         <div class="mb-10 md:mb-16">
-            <h2 id="myTime" class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl text-pink-800 underline">申請内容</h2>
-            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">申請した希望時間は、表に色がつきます。</p>
+            <h2 id="myTime" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
+                <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">申請内容</span>
+            </h2>
+            <p class="mx-auto mt-10 max-w-screen-md text-center text-gray-500 md:text-lg">申請した希望時間は、表に色がつきます。</p>
             <div class="flex justify-center">
                 @if($attendances->isEmpty())
                     <p class="font-semibold">申請された希望時間はありません。</p>
@@ -63,8 +40,10 @@
             </div>
         </div>
         <div class="mb-10 md:mb-16">
-            <h2 id="allTime" class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl text-pink-800 underline">部員の申請内容</h2>
-            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">部員がすでに申請した希望時間では、表に色がつきます。</p>
+            <h2 id="allTime" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
+                <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">部員の申請内容</span>
+            </h2>
+            <p class="mx-auto mt-10 max-w-screen-md text-center text-gray-500 md:text-lg">部員がすでに申請した希望時間では、表に色がつきます。</p>
             <div class="flex justify-center">
                 @if($allAttendances->isEmpty())
                     <p class="font-semibold">申請された希望時間はありません。</p>
@@ -106,7 +85,8 @@
         <div class="mb-10 md:mb-16">
             <h2 id="thisMonthAbsence" class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">今月の出欠</h2>
             <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">お稽古をお休みしたら、こちらのフォームから申請してください。</p>
-        </div>    
+        </div>
+
         <div class="flex justify-center relative inline-block px-1 py-2">
             @if($absences->isEmpty())
                 <p class="font-semibold">今月参加したお稽古はありません。</p>
@@ -115,12 +95,11 @@
                     <form action="{{route('absenceDelete')}}" id="form_{{ $absence->id }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <label><input type="checkbox" name="absence[id]" onchange="deleteAbsence({{ $absence->id }})" class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-red-300" value={{ $absence->id }}>{{$absence->start_date->format('Y/m/d')}}</label>
+                        <label class="cursor-pointer"><input type="checkbox" name="absence[id]" onchange="deleteAbsence({{ $absence->id }})" class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-red-300 cursor-pointer" value={{ $absence->id }}>{{$absence->start_date->format('Y/m/d')}}</label>
                     </form>
                 @endforeach
             @endif
         </div>
-
         <script>
             function deleteAbsence(id) {
                 'use strict';
@@ -133,6 +112,5 @@
                 }
             }
         </script>
-
     </div>
 </x-app-layout>
