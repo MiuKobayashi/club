@@ -42,6 +42,7 @@
             <script>
                 let isAdmin = @json(auth()->user()->admin);
                 let Duration = '00:30:00';
+                let memberNames = @json($memberNames);
             </script>
             <script type="module" src="{{ asset('/js/calendar.js') }}"></script>
             <div class="flex justify-center">

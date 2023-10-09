@@ -14,6 +14,7 @@ class DesireController extends Controller
     {
         //部員
         $users = $user->getMembers();
+        $memberNames = User::pluck('name');
         
         $times = Schedule::getTimes();
         $startTime = $times['startTime'];
@@ -26,6 +27,7 @@ class DesireController extends Controller
         
         return view('lessons.admin')->with([
             'users' => $users,
+            'memberNames' => $memberNames,
             'startTime' => $startTime,
             'endTime' => $endTime,
             'Time' => $Time,

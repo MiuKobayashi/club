@@ -50,6 +50,7 @@
             <script>
                 let isAdmin = {{auth()->user()->admin}};
                 let Duration = '00:10:00';
+                let memberNames = @json($memberNames);
             </script>
             <script type="module" src="{{ asset('/js/calendar.js') }}"></script>
             <div id='calendar' class="m-5 p-5 bg-white md:w-9/12 w-fit min-w-10 border-2 border-opacity-50 border-pink-900 rounded-lg"></div>

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //ホーム画面
-Route::get('/', [ScheduleController::class, 'countAttendance'])
+Route::get('/', [ScheduleController::class, 'homeView'])
 ->middleware(['auth', 'verified'])->name('home');
 
 Route::controller(SongController::class)->middleware(['auth'])->group(function(){

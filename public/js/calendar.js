@@ -177,7 +177,7 @@ if (calendarEl != null) {
     
             //イベントによって色を変える
             eventDidMount: function (info) {
-                if (info.event._def.title=='お稽古') {
+                if (info.event._def.title=='お稽古' || memberNames.includes(info.event._def.title)) {
                     info.el.style.background='#bfccd9',
                     info.el.style.borderColor='#bfccd9',
                     info.el.style.color='#58535E';
