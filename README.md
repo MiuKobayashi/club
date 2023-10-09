@@ -4,8 +4,8 @@
 ![ホーム画面](public/images/home3.png "home3")
 
 ## 概要
-所属する箏曲部のための、サークル活動サポートアプリ
-個人開発
+所属する箏曲部のための、サークル活動サポートアプリ<br>
+個人開発<br>
 制作期間：制作中（2023/7～）<br>
 
 サイトURL：https://sakurastlinks-8ce811838701.herokuapp.com<br>
@@ -30,14 +30,14 @@
 作業を自動化・効率化してこれらの煩雑さを解決できれば、お箏の練習や部員同士のコミュニケーションといった、最も大切な活動内容に充てられる時間が増加するのではないかと考え、制作するに至った。
 <hr><br>
 
-## 技術スタック
-- PHP
+## 使用技術
+- PHP 8.0.2
 - HTML/CSS
 - JavaScript
-- Laravel 
-- Tailwind
-- MySQL
-- FullCalendar
+- Laravel 9.52.15
+- Tailwind 3.3.3
+- MySQL 10.2.38
+- FullCalendar 6.1.8
 - Heroku 
 - Heroku Postgres
 - GitHub

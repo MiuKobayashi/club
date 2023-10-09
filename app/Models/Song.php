@@ -11,6 +11,7 @@ class Song extends Model
     protected $fillable = [
         'name',
         'performance',
+        'url'
     ];
     
     //part_songテーブルに対するリレーション(主)
@@ -34,5 +35,26 @@ class Song extends Model
     public function practicesongs()
     {
         return $this->hasMany(PracticeSong::class);
+    }
+    
+    //本番の曲を取得する関数
+    public function selectPerformance()
+    {
+        return $this->where('performance',1)
+                    ->with(['parts','practicesongs.user']);
+    }
+    
+    public static function getYouTubeVideoId()
+    {
+        $song = new Song();
+        $urls = $song->selectPerformance()
+                         ->whereNot('url', null)
+                         ->pluck('url');
+        
+        foreach ($urls as $url) {
+            $videoUrls[] = explode("/", $url)[3];
+        }
+        
+        return $videoUrls;
     }
 }

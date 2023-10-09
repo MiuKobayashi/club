@@ -53,6 +53,7 @@
                     </select>
                     <p class="end_time__error" style="color:darkred">{{ $errors->first('desire.end_time') }}</p>
                 </div>
+                
                 <!--備考を入力する-->
                 <div class="sm:col-span-2">
                     <label for="desire" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">備考</label>

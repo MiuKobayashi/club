@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('performance');
+            $table->text('url')->nullable(true);
             $table->timestamps();
         });
     }

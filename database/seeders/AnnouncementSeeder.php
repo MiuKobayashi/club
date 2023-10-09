@@ -17,20 +17,20 @@ class AnnouncementSeeder extends Seeder
     public function run()
     {
         DB::table('announcements')->insert([
-            'title' => 'テストタイトル01',
-            'description' => 'テストお知らせ01です',
+            'title' => '今月のお稽古について',
+            'description' => '今月のお稽古をカレンダーに登録しました。確認してください。',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('announcements')->insert([
-            'title' => 'テストタイトル02',
-            'description' => 'テストお知らせ02です',
+            'title' => '和室の使用について',
+            'description' => '今月の1日〜５日は和室使用禁止期間になりました。',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('announcements')->insert([
-            'title' => 'テストタイトル03',
-            'description' => 'テストお知らせ03です',
+            'title' => '明日のお稽古の部屋について',
+            'description' => '明日は和室（小）から（大）に変更になりました。',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

@@ -36,4 +36,11 @@ class PracticeSong extends Model
         return $this->belongsTo(User::class);
     }
     
+    public function notInProgress()
+    {
+        return $this->where('user_id',auth()->id())
+                    ->update([
+                        'inprogress' => 0
+                    ]);
+    }
 }
