@@ -22,13 +22,13 @@ class SongSeeder extends Seeder
             'updated_at' => new DateTime(),
             'performance' => TRUE,
             'url' => 'https://youtu.be/y7YH_5K1G6U?si=_R7NmdL_hhD4AmTd',
-            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/y7YH_5K1G6U?si=3yvhtm8n_xrDleZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '花筏',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => FALSE,
+            'url' => 'https://youtu.be/jXnjkr7WoFk?si=BfshCRBQv3Aw7uF7',
         ]);
         DB::table('songs')->insert([
             'name' => '飛躍',
@@ -36,7 +36,6 @@ class SongSeeder extends Seeder
             'updated_at' => new DateTime(),
             'performance' => TRUE,
             'url' => 'https://youtu.be/90evCJHDB4A?si=dxRHOfPlhLA_ZnO6',
-            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/90evCJHDB4A?si=dxRHOfPlhLA_ZnO6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '夜空ノムコウ',
@@ -49,6 +48,7 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => FALSE,
+            'url' => 'https://youtu.be/KiLs48hp2Pk?si=BYYjXO0VNE5TNVIy',
         ]);
         DB::table('songs')->insert([
             'name' => 'わらべうたメドレー',
@@ -61,12 +61,14 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => FALSE,
+            'url' => 'https://youtu.be/anGg7pqwb9Q?si=I026flVLRm0sBllL',
         ]);
         DB::table('songs')->insert([
             'name' => '光のしづく',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => FALSE,
+            'url' => 'https://youtu.be/vUDC3sMMH_U?si=znJFM6BUm7jb4hxL',
         ]);
         DB::table('songs')->insert([
             'name' => 'さくら（三重奏）',
@@ -93,7 +95,6 @@ class SongSeeder extends Seeder
             'updated_at' => new DateTime(),
             'performance' => TRUE,
             'url' => 'https://youtu.be/LczZznH1yLY?si=a76DeUOb6kqW_x5n',
-            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/LczZznH1yLY?si=a76DeUOb6kqW_x5n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '地上の星',
@@ -107,7 +108,6 @@ class SongSeeder extends Seeder
             'updated_at' => new DateTime(),
             'performance' => TRUE,
             'url' => 'https://youtu.be/Y_Db88Ef6FQ?si=lSw1my8xd5AFtb2e',
-            'movie' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/Y_Db88Ef6FQ?si=w9P5EiCDoDcKEPv5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ]);
         DB::table('songs')->insert([
             'name' => '弦鳴',
@@ -120,12 +120,14 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => FALSE,
+            'url' => 'https://youtu.be/ZtIYyRvozLk?si=hEtKEGVXuywbuYzo',
         ]);
         DB::table('songs')->insert([
             'name' => '花園',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => TRUE,
+            'url' => 'https://youtu.be/ndMQ5E7Tu5U?si=U1A2g1BXseg03WpX',
         ]);
     }
 }

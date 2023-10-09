@@ -37,54 +37,6 @@ class Practice_SongSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 3,
-                'part_id' => 1,
-                'user_id' => 1,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 5,
-                'part_id' => 6,
-                'user_id' => 1,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 6,
-                'part_id' => 1,
-                'user_id' => 1,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 7,
-                'part_id' => 1,
-                'user_id' => 1,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 8,
-                'part_id' => 1,
-                'user_id' => 1,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 9,
-                'part_id' => 1,
-                'user_id' => 1,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 10,
                 'part_id' => 2,
                 'user_id' => 1,
         ]);
@@ -92,7 +44,15 @@ class Practice_SongSeeder extends Seeder
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
-                'song_id' => 11,
+                'song_id' => 4,
+                'part_id' => 6,
+                'user_id' => 1,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 5,
                 'part_id' => 2,
                 'user_id' => 1,
         ]);
@@ -101,15 +61,7 @@ class Practice_SongSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 12,
-                'part_id' => 6,
-                'user_id' => 1,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 13,
-                'part_id' => 6,
+                'part_id' => 2,
                 'user_id' => 1,
         ]);
         DB::table('practice_songs')->insert([
@@ -128,33 +80,32 @@ class Practice_SongSeeder extends Seeder
                 'part_id' => 6,
                 'user_id' => 1,
         ]);
-        
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
-                'song_id' => 1,
-                'part_id' => 8,
-                'user_id' => 2,
+                'song_id' => 16,
+                'part_id' => 3,
+                'user_id' => 1,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
-                'song_id' => 2,
+                'song_id' => 17,
+                'part_id' => 2,
+                'user_id' => 1,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 3,
                 'part_id' => 1,
                 'user_id' => 2,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => TRUE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 3,
-                'part_id' => 2,
-                'user_id' => 2,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 4,
@@ -165,6 +116,14 @@ class Practice_SongSeeder extends Seeder
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
+                'song_id' => 5,
+                'part_id' => 6,
+                'user_id' => 2,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
                 'song_id' => 6,
                 'part_id' => 2,
                 'user_id' => 2,
@@ -177,13 +136,54 @@ class Practice_SongSeeder extends Seeder
                 'part_id' => 2,
                 'user_id' => 2,
         ]);
+        
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 14,
+                'part_id' => 2,
+                'user_id' => 2,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 4,
+                'part_id' => 2,
+                'user_id' => 3,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => TRUE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 5,
+                'part_id' => 6,
+                'user_id' => 3,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 6,
+                'part_id' => 3,
+                'user_id' => 3,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 8,
+                'part_id' => 1,
+                'user_id' => 3,
+        ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 9,
-                'part_id' => 3,
-                'user_id' => 2,
+                'part_id' => 1,
+                'user_id' => 3,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
@@ -191,15 +191,64 @@ class Practice_SongSeeder extends Seeder
                 'updated_at' => new DateTime(),
                 'song_id' => 10,
                 'part_id' => 1,
-                'user_id' => 2,
+                'user_id' => 3,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 11,
+                'part_id' => 6,
+                'user_id' => 3,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 14,
+                'part_id' => 3,
+                'user_id' => 3,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 6,
+                'part_id' => 6,
+                'user_id' => 4,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 8,
+                'part_id' => 2,
+                'user_id' => 4,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => TRUE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 9,
+                'part_id' => 2,
+                'user_id' => 4,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 10,
+                'part_id' => 2,
+                'user_id' => 4,
+        ]);
+        
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 11,
                 'part_id' => 1,
-                'user_id' => 2,
+                'user_id' => 4,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
@@ -207,163 +256,26 @@ class Practice_SongSeeder extends Seeder
                 'updated_at' => new DateTime(),
                 'song_id' => 12,
                 'part_id' => 1,
-                'user_id' => 2,
+                'user_id' => 4,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 13,
-                'part_id' => 1,
-                'user_id' => 2,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 14,
-                'part_id' => 6,
-                'user_id' => 2,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 15,
-                'part_id' => 1,
-                'user_id' => 2,
-        ]);
-        
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 1,
-                'part_id' => 8,
-                'user_id' => 3,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 2,
                 'part_id' => 2,
-                'user_id' => 3,
+                'user_id' => 4,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 5,
-                'part_id' => 2,
-                'user_id' => 3,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 8,
-                'part_id' => 2,
-                'user_id' => 3,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 10,
-                'part_id' => 2,
-                'user_id' => 3,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => TRUE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 14,
                 'part_id' => 4,
-                'user_id' => 3,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 17,
-                'part_id' => 1,
-                'user_id' => 3,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 1,
-                'part_id' => 8,
                 'user_id' => 4,
         ]);
         DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 2,
-                'part_id' => 1,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => TRUE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 3,
-                'part_id' => 2,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 5,
-                'part_id' => 1,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 8,
-                'part_id' => 1,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 10,
-                'part_id' => 1,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 11,
-                'part_id' => 6,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 13,
-                'part_id' => 2,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => FALSE,
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime(),
-                'song_id' => 14,
-                'part_id' => 3,
-                'user_id' => 4,
-        ]);
-        DB::table('practice_songs')->insert([
-                'inprogress' => TRUE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 1,
@@ -371,12 +283,124 @@ class Practice_SongSeeder extends Seeder
                 'user_id' => 5,
         ]);
         DB::table('practice_songs')->insert([
+                'inprogress' => TRUE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 6,
+                'part_id' => 1,
+                'user_id' => 5,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 9,
+                'part_id' => 3,
+                'user_id' => 5,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 13,
+                'part_id' => 1,
+                'user_id' => 5,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 14,
+                'part_id' => 5,
+                'user_id' => 5,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 15,
+                'part_id' => 1,
+                'user_id' => 5,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 16,
+                'part_id' => 1,
+                'user_id' => 5,
+        ]);
+        DB::table('practice_songs')->insert([
                 'inprogress' => FALSE,
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'song_id' => 17,
-                'part_id' => 2,
+                'part_id' => 1,
                 'user_id' => 5,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => TRUE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 2,
+                'part_id' => 1,
+                'user_id' => 6,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 7,
+                'part_id' => 1,
+                'user_id' => 6,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 11,
+                'part_id' => 2,
+                'user_id' => 6,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 12,
+                'part_id' => 6,
+                'user_id' => 6,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 13,
+                'part_id' => 6,
+                'user_id' => 6,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 14,
+                'part_id' => 6,
+                'user_id' => 6,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 15,
+                'part_id' => 2,
+                'user_id' => 6,
+        ]);
+        DB::table('practice_songs')->insert([
+                'inprogress' => FALSE,
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+                'song_id' => 16,
+                'part_id' => 2,
+                'user_id' => 6,
         ]);
     }
 }

@@ -34,5 +34,11 @@ class AnnouncementSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
+        DB::table('announcements')->insert([
+            'title' => '今日のお稽古について',
+            'description' => '先生の都合により、今日のお稽古はお休みになりました。',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
     }
 }

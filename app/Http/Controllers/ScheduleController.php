@@ -152,8 +152,9 @@ class ScheduleController extends Controller
     }
     
     
-    public function countAttendance(Announcement $announcement, Schedule $schedule)
+    public function homeView(Announcement $announcement, Schedule $schedule)
     {
+        $memberNames = User::pluck('name');
         $announcements = $announcement->getPaginateByLimit();
         
         //今月の活動日
@@ -164,6 +165,7 @@ class ScheduleController extends Controller
         $amount = 1000*$attendance;
 
         return view('lessons.home')->with([
+            'memberNames' => $memberNames,
             'announcements' => $announcements,
             'attendances' => $attendance,
             'amount' => $amount]);
