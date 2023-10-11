@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="invisible md:visible space-x-8 sm:-my-px sm:ml-10 flex">
+                <div class="hidden md:flex space-x-8 sm:-my-px sm:ml-10">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -31,22 +31,43 @@
                         </svg>
                     </x-nav-link>
                     @if(auth()->user()->admin)
-                    <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
-                        {{ __('Admin') }}
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                        </svg>
-                    </x-nav-link>
+                        <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                            {{ __('Admin') }}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                            </svg>
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
+            
+            <!--<div class="relative group bg-red-100">-->
+            <!--    <div>-->
+            <!--      Menu-->
+            <!--    </div>-->
+            <!--    <div class="absolute invisible group-hover:visible bg-green-100">-->
+            <!--      <div><a href="/progress">Item1</a></div>-->
+            <!--      <div><a href="/desire">Item2</a></div>-->
+            <!--      <div><a href="/admin">Item3</a></div>-->
+            <!--    </div>-->
+            <!--</div>-->
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-auto">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-600 bg-red-300 hover:text-gray-900 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div><span class="font-semibold">{{ Auth::user()->name }}</span><br>
+                                <span class="text-xs">
+                                    @if(Auth::user()->admin)
+                                        管理者
+                                    @else
+                                        部員
+                                    @endif
+                                </span>
+                            </div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -57,6 +78,20 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-responsive-nav-link :href="route('home')">
+                            {{ __('Home') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('progress')">
+                            {{ __('Progress') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('desire')">
+                            {{ __('Desire') }}
+                        </x-responsive-nav-link>
+                        @if(auth()->user()->admin)
+                            <x-responsive-nav-link :href="route('admin')">
+                                {{ __('Admin') }}
+                            </x-responsive-nav-link>
+                        @endif
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
@@ -64,7 +99,6 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -76,11 +110,11 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+            <div class="m-2 flex items-center sm:hidden sm:ml-auto items-center justify-end absolute right-0">
+                <button @click="open = !open" class="inline-flex p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path :class="{'hidden': open, 'inline-flex': !open}" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path :class="{'hidden': !open, 'inline-flex': open}" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -103,9 +137,6 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('home')">
-                    {{ __('Home') }}
-                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('progress')">
                     {{ __('Progress') }}
                 </x-responsive-nav-link>
@@ -117,19 +148,19 @@
                         {{ __('Admin') }}
                     </x-responsive-nav-link>
                 @endif
-                <x-responsive-nav-link :href="route('profile.edit')">
+                <x-dropdown-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
+                </x-dropdown-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-dropdown-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                    </x-dropdown-link>
                 </form>
             </div>
         </div>

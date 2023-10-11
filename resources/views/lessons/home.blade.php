@@ -49,5 +49,6 @@
                 <div id='calendar' class="m-5 p-5 bg-white md:w-9/12 w-fit min-w-10 border-2 border-opacity-50 border-pink-900 rounded-lg"></div>
             </div>
         </div>
+        <a href="#" class="back-to-top js-to-top">TOP</a>
     </div>
 </x-app-layout>

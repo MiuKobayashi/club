@@ -5,11 +5,11 @@
                 <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">申請内容</span>
             </h2>
             <p class="mx-auto mt-10 max-w-screen-md text-center text-gray-500 md:text-lg">申請した希望時間は、表に色がつきます。</p>
-            <div class="flex justify-center">
+            <div class="flex justify-center overflow-scroll">
                 @if($attendances->isEmpty())
                     <p class="font-semibold">申請された希望時間はありません。</p>
                 @else
-                    <table class="w-full">
+                    <table class="w-full whitespace-nowrap">
                         <tr class="border-b-4 border-red-300">
                             <th class="border-r-4 border-red-300"></th>
                             @for ($i = 0; $i < 8; $i++)
@@ -44,11 +44,11 @@
                 <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">部員の申請内容</span>
             </h2>
             <p class="mx-auto mt-10 max-w-screen-md text-center text-gray-500 md:text-lg">部員がすでに申請した希望時間では、表に色がつきます。</p>
-            <div class="flex justify-center">
+            <div class="flex justify-center overflow-scroll">
                 @if($allAttendances->isEmpty())
                     <p class="font-semibold">申請された希望時間はありません。</p>
                 @else
-                    <table class="w-full">
+                    <table class="w-full whitespace-nowrap">
                         <tr class="border-b-4 border-red-300">
                             <th class="border-r-4 border-red-300"></th>
                             @for ($i = 0; $i < 8; $i++)
@@ -83,7 +83,7 @@
             <a href="/desire/create" class="font-semibold hover:underline">希望時間の申請はこちら</a>
         </div>
         <div class="mb-10 md:mb-16">
-            <h2 id="thisMonthAbsence" class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">今月の出欠</h2>
+            <h2 id="thisMonthAbsence" class="mt-10 mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">今月の出欠</h2>
             <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">お稽古をお休みしたら、こちらのフォームから申請してください。</p>
         </div>
 
@@ -100,6 +100,7 @@
                 @endforeach
             @endif
         </div>
+        <a href="#" class="back-to-top js-to-top">TOP</a>
         <script>
             function deleteAbsence(id) {
                 'use strict';

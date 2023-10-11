@@ -38,6 +38,7 @@
 - Tailwind 3.3.3
 - MySQL 10.2.38
 - FullCalendar 6.1.8
+- YouTube DATA API v3
 - Heroku 
 - Heroku Postgres
 - GitHub
