@@ -9,9 +9,9 @@
             <span class="bg-red-100 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">曲目の動画一覧</span>
         </h2>
         <p class="mx-auto mt-2 max-w-screen-md text-center text-gray-500 md:text-lg flex justify-center">本番で演奏する曲目の動画です。練習の参考にしてください。</p>
-        <div class="flex flex-wrap mx-5 mt-10">
+        <div class="flex flex-wrap justify-center mx-5 mt-10">
                 @foreach($codes as $key => $code)
-                    <div class="mx-10">
+                    <div class="youtube">
                         <p class="text-lg mt-5">【{{ $performances[$key]->name }}】</p>
                         {!! $code !!}
                     </div>

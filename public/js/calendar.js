@@ -7,15 +7,20 @@ import axios from 'axios';
 
 
 var calendarEl = document.getElementById("calendar");
+let userId = null;
+let memberName = "お稽古";
+
 if (document.getElementById("user_id") != null) {
     let memberId = document.getElementById("user_id");
     memberId.addEventListener("change", function(){
         userId = memberId.value;
+        // 選択された部員の名前をプロンプトにあらかじめ入力
+        const selectedOption = memberId.options[memberId.selectedIndex];
+        memberName = selectedOption.text;
     });
 }
 
 
-let userId = null;
 let activeButtonId = "myLessons"; // 初期値を設定
 
 let calendar;
@@ -43,18 +48,21 @@ if (calendarEl != null) {
         initialView: "timeGridWeek",
         firstDay: 1,
         headerToolbar: {
-            left: "prev next,today",
+            left: "prev,next today",
             center: "title",
             right: "dayGridMonth,timeGridWeek,listMonth",
         },
     
         navLinks: true,
     
-        locale: "ja",
-        
         //時間表示を制限
         views: {
             timeGridWeek: {
+                slotLabelFormat: {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: false
+                },
                 slotMinTime: '9:00:00',
                 slotMaxTime: '21:00:00'
             }
@@ -63,16 +71,12 @@ if (calendarEl != null) {
          //全量表示
         contentHeight: 'auto',
         
-         //現在の時刻に赤線ボーダーを表示
+        //現在の時刻に赤線ボーダーを表示
         nowIndicator: true,
-    
-         //月表示の「日」を削除
-        dayCellContent: function(arg){
-    		return arg.date.getDate();
-    	},
+	    
 	    
 	    //時間をhh:mm表記に
-	    eventTimeFormat: { hour: 'numeric', minute: '2-digit' },
+	    eventTimeFormat: { hour: 'numeric', minute: '2-digit', hour12:false},
 	
     	//イベントの時間を表示
     	displayEventTime: true,
@@ -81,9 +85,18 @@ if (calendarEl != null) {
     	    basicWeek: true,
     	    "default": true
     	},
-	
-
-	
+    	
+        dayHeaderContent: function(info) {
+                // スマートフォンの場合のカスタムテキスト
+                if (window.innerWidth <= 600) { // 600px以下はスマートフォンとみなす
+                    const date = info.date.getDate(); // 日にち
+                    const dayOfWeek = info.date.toLocaleDateString('en-US', { weekday: 'short' }).slice(0, 1);
+                    return `${date}\n${dayOfWeek}`;
+                }
+                // デフォルトのテキスト
+                return info.text;
+        },
+        
     	//時間を10分間隔に
     	slotDuration: Duration,
 	
@@ -101,7 +114,7 @@ if (calendarEl != null) {
         
         select: function (info) {
             // 入力ダイアログ
-            const eventName = prompt("イベントを入力してください");
+            const eventName = prompt("イベントを入力してください", memberName);
         
             if (eventName) {
                 // イベントが終日の場合は allDay を true に、それ以外の場合は false に設定
@@ -160,7 +173,7 @@ if (calendarEl != null) {
             const result = confirm("削除しますか？");
             if (result) {
                 if (info.timeText == "0:00") {
-            info.event.setAllDay(true); // 終日のイベントの場合、allDayをtrueに設定
+            info.event.setAllDay(true);
         }
                 axios.post("/schedule-delete",{
                         id: info.event.id,

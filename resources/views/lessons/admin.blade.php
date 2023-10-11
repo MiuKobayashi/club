@@ -150,6 +150,7 @@
             </div>
         </div>
     </div>
+    <a href="#" class="back-to-top js-to-top">TOP</a>
     <script>
         function deleteAnnounce(id) {
             'use strict'
