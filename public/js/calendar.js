@@ -14,14 +14,14 @@ if (document.getElementById("user_id") != null) {
     let memberId = document.getElementById("user_id");
     memberId.addEventListener("change", function(){
         userId = memberId.value;
-        // 選択された部員の名前をプロンプトにあらかじめ入力
+        // 選択された部員の名前を入力欄にあらかじめ入力
         const selectedOption = memberId.options[memberId.selectedIndex];
         memberName = selectedOption.text;
     });
 }
 
 
-let activeButtonId = "myLessons"; // 初期値を設定
+let activeButtonId = "myLessons";
 
 let calendar;
 

@@ -15,8 +15,16 @@
                     <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">曲目の動画を検索してください。</p>
             </div>
             <form action="{{ route('songSearch') }}" method="get" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
-                <input type="text" name="word" placeholder="Search YouTube videos" class="w-full rounded border border-gray-300 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" value="{{ old('word', $searchQuery)}}">
-                <button type="submit" class="inline-block rounded-lg bg-pink-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-700 transition duration-100 hover:bg-pink-700 focus-visible:ring active:bg-pink-700 md:text-base">Search</button>
+                <input type="text" name="word" placeholder="Song Title" class="w-full rounded border border-gray-300 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" value="{{ old('word', $searchQuery)}}">
+                
+                <button type="submit" class="inline-block rounded-lg bg-pink-900 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-700 transition duration-100 hover:bg-pink-700 focus-visible:ring active:bg-pink-700 md:text-base">
+                    <span class="flex justify-center items-center">
+                        Search
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </span>
+                </button>
             </form>
             
             <h2 class="mt-10 mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-2xl">YouTube Video</h2>

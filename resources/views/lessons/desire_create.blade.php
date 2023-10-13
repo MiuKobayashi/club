@@ -27,7 +27,7 @@
                     <label for="desire" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">*何時から</label>
                     <select id="desire_start" name="desire[start_time]" class="mt-1 block w-40 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         <option value="" style="display: none;">選択してください</option>
-                        <option value="9:00:00">9:00</option>
+                        <option value="09:00:00">9:00</option>
                         <option value="10:40:00">10:40</option>
                         <option value="12:20:00">12:20</option>
                         <option value="13:20:00">13:20</option>

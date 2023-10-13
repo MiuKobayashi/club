@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="mb-10 md:mb-16">
-            <h2 id="allTime" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
+            <h2 id="allTime" class="mx-auto mt-10 text-center text-2xl font-bold text-pink-800">
                 <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">部員の申請内容</span>
             </h2>
             <p class="mx-auto mt-10 max-w-screen-md text-center text-gray-500 md:text-lg">部員がすでに申請した希望時間では、表に色がつきます。</p>
@@ -75,6 +75,7 @@
                     </table>
                 @endif
             </div>
+
         </div>
         <div class="mt-5 flex justify-end text-indigo-700">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

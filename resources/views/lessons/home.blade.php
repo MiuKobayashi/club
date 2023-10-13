@@ -24,7 +24,7 @@
             <div>{{ $announcements->links('vendor.pagination.tailwind2') }}</div>
         </div>
         <div class="mb-10 md:mb-16">
-            <h2 id="amount" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
+            <h2 id="amount" class="mt-10 mx-auto text-center text-2xl font-bold text-pink-800">
                 <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">今月の{{ Auth::user()->name }}さんのお稽古代</span>
             </h2>
             <div class="my-20 flex justify-center">

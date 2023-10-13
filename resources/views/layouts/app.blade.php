@@ -41,6 +41,37 @@
               border-radius: 50%;
               z-index: -1;
             }
+            .tooltip{
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+            .description {
+                display: none;
+                position: absolute;
+                padding: 10px;
+                font-size: 12px;
+                line-height: 1.6em;
+                color: #fff;
+                border-radius: 5px;
+                background: #000;
+                width: 100px;
+            }
+            .description:before {
+                content: "";
+                position: absolute;
+                top: -24px;
+                right: 60%;
+                border: 15px solid transparent;
+                border-top: 15px solid #000;
+                margin-left: -15px;
+                transform: rotateZ(180deg);
+            }
+            .tooltip:hover .description{
+                display: inline-block;
+                top: 30px;
+                left: 0px;
+            }            
             .changeColor {
                 background-color: rosybrown;
             }
@@ -75,15 +106,6 @@
               color: palevioletred;
             }
             
-            .youtube {
-              width: 100%;
-              aspect-ratio: 16 / 9;
-            }
-            .youtube iframe {
-              width: 100%;
-              height: 100%;
-            }
-            
             @media (max-width: 600px) {
                 .fc-toolbar {
                     display: flex;
@@ -93,10 +115,34 @@
                 .fc-left,
                 .fc-center,
                 .fc-right {
-                    width: 100%;
-                    text-align: center;
+                  width: 100%;
+                  text-align: center;
                 }
             }
+            
+            .youtube {
+              margin-left: 2.5rem;
+              margin-right: 2.5rem;
+            }
+            
+            @media (max-width: 767px) {
+              .youtube {
+                position: relative;
+                width: 100%;
+                padding-top: 56.25%;
+                aspect-ratio: 16 / 9;
+                margin-bottom: 2.5rem;
+              }
+              .youtube iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+                
         </style>
     </head>
     <body class="font-sans antialiased m-0">
@@ -110,7 +156,7 @@
         </div>
         <script>
             $(function () {
-              // スクロールしたら「トップに戻る」ボタンが表示される
+              // スクロールしたら「トップに戻る」ボタンを表示する
               const toTopButton = $(".js-to-top");
               const scrollHeight = 100;
               toTopButton.hide();
