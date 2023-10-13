@@ -75,7 +75,6 @@ class Schedule extends Model
         $EndMonth = Carbon::now()->endOfMonth()->toDateString();
         
         return $this->whereBetween('start_date',[$StartMonth, $EndMonth])
-                    ->where('event_name',"お稽古")
                     ->where('user_id', auth()->user()->id)
                     ->orderBy('start_date');
     }

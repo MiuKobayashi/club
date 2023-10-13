@@ -26,7 +26,7 @@ class ScheduleSeeder extends Seeder
         DB::table('schedules')->insert([
             'event_name' => '徽音祭',
             'start_date' => date('2023-11-12 00:00:00'),
-            'end_date' => date('2023-12-13 00:00:00'),
+            'end_date' => date('2023-11-13 00:00:00'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

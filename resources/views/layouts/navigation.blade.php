@@ -41,19 +41,6 @@
                 </div>
             </div>
             
-            <!--<div class="relative group bg-red-100">-->
-            <!--    <div>-->
-            <!--      Menu-->
-            <!--    </div>-->
-            <!--    <div class="absolute invisible group-hover:visible bg-green-100">-->
-            <!--      <div><a href="/progress">Item1</a></div>-->
-            <!--      <div><a href="/desire">Item2</a></div>-->
-            <!--      <div><a href="/admin">Item3</a></div>-->
-            <!--    </div>-->
-            <!--</div>-->
-
-
-
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-auto">
                 <x-dropdown align="right" width="48">

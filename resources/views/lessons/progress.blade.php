@@ -52,7 +52,7 @@
             <a href="/progress/create" class="font-semibold hover:underline">進捗状況の登録はこちら</a>
         </div>
         <div class="mb-10 md:mb-16">
-            <h2 id="performanceSongs" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
+            <h2 id="performanceSongs" class="mx-auto mt-10 text-center text-2xl font-bold text-pink-800">
                 <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">本番の曲</span>
             </h2>
             <p class="mx-auto mt-10 max-w-screen-md text-center text-gray-500 md:text-lg">演奏会で演奏する曲目です。
