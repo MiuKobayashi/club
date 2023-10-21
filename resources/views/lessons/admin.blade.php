@@ -55,52 +55,13 @@
             <script type="module" src="{{ asset('/js/calendar.js') }}"></script>
             <div id='calendar' class="m-5 p-5 bg-white md:w-9/12 w-fit min-w-10 border-2 border-opacity-50 border-pink-900 rounded-lg"></div>
         </div>
-        <h2 id="allTimeTable" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
-            <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">希望時間</span>
-        </h2>
-        <div class="mt-10 flex justify-center">
-            <div class="max-w-fit">
-                @if($attendances->isEmpty())
-                    <p class="font-semibold">申請された希望時間はありません。</p>
-                @else
-                    @foreach($attendances as $attendance)
-                    <h1 class="mt-10 font-bold">{{ $attendance->start_date->format('Y/m/d') }}</h1>
-                    <div class="m-2.5 flex justify-center">
-                        <table class="flex justify-center">
-                            <tr class="border-b-4 border-red-300">
-                                <th class="border-r-4 border-red-300"></th>
-                                @for ($i = 0; $i < 8; $i++)
-                                    <th>{{ $Time[$i] }}</th>        
-                                @endfor
-                                <th>備考</th>
-                            </tr>
-                            @foreach($users as $user)
-                            <tr>
-                                <th class="border-r-4 border-red-300">{{ $user->name }}</th>
-                                @for ($i = 0; $i < 8; $i++)
-                                    <td id="td{{$attendance->id}}_{{$user->id}}_{{$i}}" class="border-r-2 border-dashed border-red-300"></td>    
-                                @endfor
-                                @foreach ($attendance->desires as $Times)
-                                    @if($Times->user_id == $user->id)
-                                        @for ($i = 0; $i < 8; $i++)
-                                            @if($startTime[$i] >= $Times->start_time && $endTime[$i] <= $Times->end_time)
-                                                <script>
-                                                    document.getElementById('td{{$attendance->id}}_{{$user->id}}_{{$i}}').classList.add("changeColor");
-                                                </script>
-                                            @endif
-                                        @endfor
-                                        <td class="text-center">{{$Times->remarks}}</td>
-                                    @endif
-                                @endforeach
-                            </tr>
-                            @endforeach
-                        </table>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
+        <div class="mt-5 flex justify-end text-indigo-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 bg-indigo-100">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+            </svg>
+            <a href="/admin/desire" class="font-semibold hover:underline bg-indigo-100">お稽古順作成はこちら</a>
         </div>
-        <h2 id="memberList" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
+        <h2 id="memberList" class="mx-auto mt-10 text-center text-2xl font-bold text-pink-800">
             <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">部員名簿</span>
         </h2>
         <div class="mt-10 py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -117,34 +78,34 @@
                             <th scope="col" class="bg-red-200 text-sm font-semibold text-gray-900 px-6 py-4">曲</th>
                             <th scope="col" class="bg-red-200 text-sm font-semibold text-gray-900 px-6 py-4">パート</th>
                         </tr>
-                            @foreach($users as $user)
-                                <tr class="border-b-2 text-white">    
-                                    <th class="bg-red-400 text-sm text-white font-semibold px-6 py-4 whitespace-nowrap">{{ $user->year }}</th>
-                                    <th class="bg-red-300 text-sm text-white font-semibold px-6 py-4 whitespace-nowrap">{{ $user->name }}</th>
-                                    @if($user->practicesongs->isEmpty())
-                                        <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">-</td>
-                                        <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">-</td>
-                                    @else
-                                        <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                            @foreach($user->practicesongs as $practiceSong)
-                                                {{ $practiceSong->song->name }}<br>
-                                            @endforeach
-                                        </td>
-                                        <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                            @foreach($user->practicesongs as $practiceSong)
-                                                {{ $practiceSong->part->name }}<br>
-                                            @endforeach
-                                        </td>
-                                    @endif
-                                    <td class="bg-red-100 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                        @if ($user->experience)
-                                            ◯
-                                        @else
-                                            ×
-                                        @endif
+                        @foreach($users as $user)
+                            <tr class="border-b-2 text-white">    
+                                <th class="bg-red-400 text-sm text-white font-semibold px-6 py-4 whitespace-nowrap">{{ $user->year }}</th>
+                                <th class="bg-red-300 text-sm text-white font-semibold px-6 py-4 whitespace-nowrap">{{ $user->name }}</th>
+                                @if($user->practicesongs->isEmpty())
+                                    <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">-</td>
+                                    <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">-</td>
+                                @else
+                                    <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                        @foreach($user->practicesongs as $practiceSong)
+                                            {{ $practiceSong->song->name }}<br>
+                                        @endforeach
                                     </td>
-                                </tr>
-                            @endforeach
+                                    <td class="bg-red-200 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                        @foreach($user->practicesongs as $practiceSong)
+                                            {{ $practiceSong->part->name }}<br>
+                                        @endforeach
+                                    </td>
+                                @endif
+                                <td class="bg-red-100 text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                    @if ($user->experience)
+                                        ◯
+                                    @else
+                                        ×
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </thread>
                 </table>
             </div>

@@ -3,9 +3,9 @@
         <a href="/admin" class="font-semibold text-gray-600 hover:underline">Admin</a>
         ＞
         <a href="/admin/create" class="text-indigo-600 hover:underline font-semibold">お知らせの登録</a>
-    <div class="mb-10 md:mb-16">
-        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">お知らせ登録</h2>
-    </div>    
+        <div class="mb-10 md:mb-16">
+            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">お知らせ登録</h2>
+        </div>    
         <form action="/admin" method="POST" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
             @csrf
             <div class="sm:col-span-2">
@@ -29,5 +29,5 @@
             </svg>
             <a href="/progress">戻る</a>
         </div>
-        </div>
+    </div>
 </x-app-layout>

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PracticeSongController;
 use App\Http\Controllers\DesireController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ChatGptController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,15 +62,18 @@ Route::controller(ScheduleController::class)->middleware(['auth'])->group(functi
 Route::middleware(['auth', 'admin'])
 ->group(function () {
     Route::get('/admin', [DesireController::class, 'adminView'])->name('admin');
-    Route::post('/admin', [AnnouncementController::class, 'store']);
+    Route::post('/admin', [AnnouncementController::class, 'adminCreateStore']);
+    Route::get('/admin/desire', [ChatGptController::class, 'adminDesireView']);
+    Route::get('/admin/desire/plan', [ChatGptController::class, 'adminPlanView']);
+    Route::post('/admin/desire/plan', [ChatGptController::class, 'adminPlanCreate'])->name('planCreate');
 });
 
 Route::controller(AnnouncementController::class)->middleware('auth')->group(function(){
     //お知らせ登録
-    Route::get('/admin/create', 'create');
+    Route::get('/admin/create', 'adminCreateView');
     // //お知らせ編集
-    Route::get('/admin/{announcement}/edit', 'edit');
-    Route::put('/admin/{announcement}', 'update');
+    Route::get('/admin/{announcement}/edit', 'adminEditView');
+    Route::put('/admin/{announcement}', 'adminUpdate');
     Route::delete('/admin/{announcement}', 'delete');
 });
 
