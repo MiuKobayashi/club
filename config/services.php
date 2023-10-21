@@ -34,5 +34,9 @@ return [
     'youtube' => [
         'api_key' => env('YOUTUBE_API_KEY'),
     ],
+    
+    'chatgpt' => [
+        'api_key' => env('CHATGPT_API_KEY'),
+    ],
 
 ];
