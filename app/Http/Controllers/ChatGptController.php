@@ -13,36 +13,9 @@ use App\Jobs\ChatGptJob;
 
 class ChatGptController extends Controller
 {
-    public function adminDesireView(User $user, Schedule $schedule, Announcement $announcement, Request $request)
-    {
-        //部員
-        $users = $user->getMembers();
-        $memberNames = User::pluck('name');
-        
-        $times = Schedule::getTimes();
-        $startTime = $times['startTime'];
-        $endTime = $times['endTime'];
-        $Time = $times['Time'];
-        
-        //来月の全体の活動日
-        $attendance = $schedule ->selectNextMonthLessons()
-                                ->with('desires')->get();
-        
-        return view('lessons.admin_desire')->with([
-            'users' => $users,
-            'memberNames' => $memberNames,
-            'startTime' => $startTime,
-            'endTime' => $endTime,
-            'Time' => $Time,
-            'attendances' => $attendance,
-            'announcements' => $announcement->getPaginateByLimit(),
-            ]);
-
-    }
-    
     public function adminPlanView(Schedule $schedule)
     {
-            //来月の全体の活動日
+        //来月の全体の活動日
         $attendance = $schedule ->selectNextMonthLessons()
                                 ->with('desires')->get();
         
@@ -59,13 +32,15 @@ class ChatGptController extends Controller
     
         // 希望時間
         $desireId = $request->input('sentence');
-        $desires = Desire::where('schedule_id', $desireId)->with('user')->get();
-    
+        $desireDates = Schedule::where('id', $desireId)->get();
+        $desires = Desire::where('schedule_id', $desireId)->with(['user', 'schedule'])->get();
+
         $sentence = "Please create 3 patterns for the order of the lessons. Please observe the following three rules.
-① Practice for 30 minutes during each free time.
-②The first and last person will have 60 minutes each time, and the remaining people will have 30 minutes each time.
-③ Leave a 10 minute interval between lessons.
-The free time for each person is as follows.\n";
+                    ① Practice for 30 minutes during each free time.
+                    ②The first and last person will have 60 minutes each time, and the remaining people will have 30 minutes each time.
+                    ③ Leave a 10 minute interval between lessons.
+                    The free time for each person is as follows.\n";
+        
         //文章作成
         foreach ($desires as $desire) {
             // 各ユーザーと対応するスケジュールの日付範囲を取得
@@ -77,13 +52,11 @@ The free time for each person is as follows.\n";
             $sentence .= $userName . ":" . $startDate. "-" . $endDate . "\n";
         }
         
-        
-        // ChatGPT API処理
         $chat_response = $this->chat_gpt($sentence);
 
         return view('lessons.admin_plan', [
             'attendances' => $attendance,
-            'sentence' => $sentence,
+            'desireDates' => $desireDates,
             'chat_response' => $chat_response,
         ]);
     }

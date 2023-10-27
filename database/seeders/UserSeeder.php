@@ -84,5 +84,27 @@ class UserSeeder extends Seeder
             'experience' => false,
             'admin' => false,
         ]);
+        DB::table('users')->insert([
+            'name' => '部員A',
+            'email' => 'a@edu.cc.ocha.ac.jp',
+            'email_verified_at' => new DateTime(),
+            'password' => bcrypt('kotomembera'),
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'year' => 3,
+            'experience' => true,
+            'admin' => true,
+        ]);
+        DB::table('users')->insert([
+            'name' => 'test',
+            'email' => 'test@email.com',
+            'email_verified_at' => new DateTime(),
+            'password' => bcrypt('test2025'),
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            'year' => 3,
+            'experience' => true,
+            'admin' => false,
+        ]);
     }
 }

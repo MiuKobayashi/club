@@ -36,4 +36,15 @@ class DesireController extends Controller
             ]);
 
     }
+    
+    public function adminUserUpdate(Request $request, User $user)
+    {
+        $input = $request->input('adminUser');
+        $user
+        ->where('id', $input)
+        ->update([
+            'admin' => true
+        ]);
+        return redirect('/admin');
+    }
 }

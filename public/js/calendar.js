@@ -77,14 +77,13 @@ if (calendarEl != null) {
 	    
 	    //時間をhh:mm表記に
 	    eventTimeFormat: { hour: 'numeric', minute: '2-digit', hour12:false},
-	
-    	//イベントの時間を表示
-    	displayEventTime: true,
-    	displayEventEnd: {
-    	    month: true,
-    	    basicWeek: true,
-    	    "default": true
-    	},
+	    
+	    //ボタンのテキストを設定
+	    buttonText: {
+            list: 'お稽古順'
+        },
+
+    
     	
         dayHeaderContent: function(info) {
                 // スマートフォンの場合のカスタムテキスト
@@ -190,9 +189,13 @@ if (calendarEl != null) {
     
             //イベントによって色を変える
             eventDidMount: function (info) {
-                if (info.event._def.title=='お稽古' || memberNames.includes(info.event._def.title)) {
+                if (info.event._def.title=='お稽古') {
                     info.el.style.background='#bfccd9',
                     info.el.style.borderColor='#bfccd9',
+                    info.el.style.color='#58535E';
+                } else if (memberNames.includes(info.event._def.title)) {
+                    info.el.style.background='#e0f0ff',
+                    info.el.style.borderColor='#e0f0ff',
                     info.el.style.color='#58535E';
                 } else if (info.event._def.title=='合奏練習') {
                     info.el.style.background='#d8bfd8',

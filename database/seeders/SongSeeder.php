@@ -87,7 +87,7 @@ class SongSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'performance' => TRUE,
-            'url' => 'https://youtu.be/Rzzr7LudUJA?si=grfOcMoRvw7w3paC',
+            'url' => 'https://youtu.be/KnmY1bfdH9c',
         ]);
         DB::table('songs')->insert([
             'name' => '人生のメリーゴーランド',
