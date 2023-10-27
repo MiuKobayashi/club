@@ -28,7 +28,19 @@
             </form>
             
             <h2 class="mt-10 mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-2xl">YouTube Video</h2>
-            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">検索結果上位３件が表示されます。</p>
+            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">検索結果上位３件が表示されます。
+                <br>曲目を選択し、
+                <div class="flex items-center justify-center text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                    </svg>
+                    （3点リーダー）→
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                    </svg>
+                    （共有）からURLをコピーしてペーストしてください。
+                </div>
+            </p>
                 @if ($videos && !empty($searchQuery))
                     <div class="flex">
                         @foreach($videos as $video)

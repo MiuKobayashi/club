@@ -1,8 +1,5 @@
 <x-app-layout>
     <div class="m-5">
-        <!--<a href="#announce">お知らせ</a>｜-->
-        <!--<a href="#amount">お稽古代</a>｜-->
-        <!--<a href="#schedule">今月の活動予定</a>-->
         <div class="mb-10 md:mb-16">
             <h2 id="announce" class="mx-auto mt-5 text-center text-2xl font-bold text-pink-800">
                 <span class="bg-red-200 border-red-100 rounded-md py-2 px-4 md:mb-6 lg:text-3xl">お知らせ</span>

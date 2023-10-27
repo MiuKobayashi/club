@@ -63,9 +63,9 @@ Route::middleware(['auth', 'admin'])
 ->group(function () {
     Route::get('/admin', [DesireController::class, 'adminView'])->name('admin');
     Route::post('/admin', [AnnouncementController::class, 'adminCreateStore']);
-    Route::get('/admin/desire', [ChatGptController::class, 'adminDesireView']);
-    Route::get('/admin/desire/plan', [ChatGptController::class, 'adminPlanView']);
-    Route::post('/admin/desire/plan', [ChatGptController::class, 'adminPlanCreate'])->name('planCreate');
+    Route::post('/admin', [DesireController::class, 'adminUserUpdate'])->name('adminUser');
+    Route::get('/admin/plan', [ChatGptController::class, 'adminPlanView']);
+    Route::post('/admin/plan', [ChatGptController::class, 'adminPlanCreate'])->name('planCreate');
 });
 
 Route::controller(AnnouncementController::class)->middleware('auth')->group(function(){
