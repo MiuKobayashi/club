@@ -122,4 +122,8 @@
         </div>
         <a href="#" class="back-to-top js-to-top">TOP</a>
     </div>
+    <!--<div class="bg-red-300 sticky bottom-0 w-screen text-lg opacity-80 z-50 flex justify-around">-->
+    <!--    <a href="#practiceSongs">練習中の曲</a>｜<a href="#performanceSongs">本番の曲</a>｜<a href="/progress/create">進捗状況登録</a>｜<a href="/progress/movie">動画一覧</a>｜-->
+    <!--    @if(auth()->user()->admin) <a href="/progress/song">曲目の登録</a>@endif-->
+    <!--</div>-->
 </x-app-layout>

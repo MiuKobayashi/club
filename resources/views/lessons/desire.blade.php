@@ -115,4 +115,7 @@
             }
         </script>
     </div>
+    <!--<div class="bg-red-300 sticky bottom-0 w-screen text-lg opacity-80 z-50 flex justify-around">-->
+    <!--    <a href="#myTime">申請内容</a>｜<a href="#allTime">部員の申請内容</a>｜<a href="#thisMonthAbsence">出欠の登録</a>｜<a href="/desire/create">希望時間申請</a>-->
+    <!--</div>-->
 </x-app-layout>
