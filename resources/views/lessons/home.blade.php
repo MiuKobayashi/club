@@ -48,4 +48,7 @@
         </div>
         <a href="#" class="back-to-top js-to-top">TOP</a>
     </div>
+    <!--<div class="bg-red-300 sticky bottom-0 w-screen text-lg opacity-80 z-50 flex justify-around">-->
+    <!--    <a href="#announce">お知らせ</a>｜<a href="#amount">お稽古代</a>｜<a href="#schedule">カレンダー</a>-->
+    <!--</div>-->
 </x-app-layout>

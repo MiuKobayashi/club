@@ -175,6 +175,10 @@
         </div>
     </div>
     <a href="#" class="back-to-top js-to-top">TOP</a>
+    <!--<div class="bg-red-300 sticky bottom-0 w-screen text-lg opacity-80 z-50 flex justify-around">-->
+    <!--    <a href="#announceCreate" class="medium hover:text-gray-800">お知らせの編集</a>｜<a href="#allTimeTable" class="medium hover:text-gray-800">希望時間申請内容</a>｜<a href="#nextMonthCalendar" class="medium hover:text-gray-800">カレンダー</a>｜<a href="#memberList" class="medium hover:text-gray-800">部員名簿</a>｜-->
+    <!--    <a href="/admin/create" class="medium hover:text-gray-800">お知らせの登録</a>｜<a href="/admin/plan" class="medium hover:text-gray-800">お稽古順案作成</a>-->
+    <!--</div>-->
     <script>
         function deleteAnnounce(id) {
             'use strict'
