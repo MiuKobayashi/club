@@ -39,6 +39,7 @@
 - MySQL 10.2.38
 - FullCalendar 6.1.8
 - YouTube DATA API v3
+- ChatGPT API
 - Heroku 
 - Heroku Postgres
 - GitHub
