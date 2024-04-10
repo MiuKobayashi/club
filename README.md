@@ -8,11 +8,12 @@
 個人開発<br>
 制作期間：制作中（2023/7～）<br>
 
-サイトURL：https://sakurastlinks-8ce811838701.herokuapp.com<br>
-**※ログインが必須となるため、ご覧になりたい場合は以下のテストアカウントにてログインしてください。**
-- Name：test
-- Email：test@email.com
-- Password：test2025
+~~サイトURL：https://sakurastlinks-8ce811838701.herokuapp.com<br>~~
+~~**※ログインが必須となるため、ご覧になりたい場合は以下のテストアカウントにてログインしてください。**<br>~~
+~~- Name：test<br>~~
+~~- Email：test@email.com<br>~~
+~~- Password：test2025<br>~~
+**※現在は閲覧できません※**
 <hr>
 
 ## 制作の動機
